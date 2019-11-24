@@ -1,0 +1,716 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto|Raleway|Coming+Soon');
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: 'Roboto', sans-serif;
+	font-size: 16px;
+	color: #222;
+	font-size: 16px;
+	text-align: left;
+	background-color: #fff; /* edf6ff */
+}
+
+footer {
+	text-align: center;
+	padding: 20px;
+	margin-top: 20px;
+	background: #fff;
+	border-top: 1px solid #ccc;
+}
+
+a:link,
+a:visited {
+	color: #004c82;
+	text-decoration: underline;
+	font-weight: 400;
+}
+a:hover,
+a:focus {
+	color: #0274be;
+	text-decoration: underline;
+}
+
+nav {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+}
+
+header,
+.search-bar {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	align-self: center;
+	text-align: center;
+}
+header {
+	font-size: 20px;
+	padding: 20px 20px 0px 20px;
+}
+.search-section {
+	margin: 0;
+	padding: 20px 0;
+}
+form.search-bar {
+	padding-top: 20px;
+}
+.search-bar > div {
+	padding: 10px;
+}
+main {
+	margin: 0 30px;
+}
+
+.hero {
+	color: #fff;
+	background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8)),
+		url(img/nacho-capelo-hMXuZrfmCWM-unsplash.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: 15% 0%;
+	background-attachment: scroll;
+	box-shadow: 0 0 10px black;
+}
+/* Vertically center header content */
+@media only screen and (max-width: 500px) {
+	.heroX {
+		height: 100vh; /* fills screen */
+	}
+
+	p {
+		line-height: 1;
+	}
+
+	header h1 {
+		font-size: 32px;
+	}
+	header,
+	.search-section h2 {
+		font-size: 24px;
+	}
+	.search-section h2 {
+		margin: 0 30px;
+	}
+	.search-bar > div {
+		padding: 5px;
+	}
+	main {
+		margin: 0 30px;
+	}
+}
+
+header a:link,
+header a:visited {
+	text-decoration: none;
+	color: #fff;
+}
+header a:hover,
+header a:focus {
+	text-decoration: none;
+	color: #fff;
+}
+
+h1,
+h2,
+p:not(.simple),
+a:link,
+button,
+input,
+select,
+form,
+footer {
+	font-family: 'Coming Soon', 'Roboto', cursive;
+	font-size: inherit;
+}
+h3,
+h4,
+h5,
+h6 {
+	margin-top: 0;
+	margin-bottom: 8px;
+}
+
+p {
+	margin: 20px 0;
+}
+
+h1 {
+	font-size: 42px;
+	line-height: 0.5;
+	padding-bottom: 20px;
+	color: #fff;
+	font-size: 42px;
+	font-weight: 400;
+}
+h2 {
+	color: #004c82;
+	font-size: 30px;
+	font-weight: 400;
+	text-align: center;
+}
+h3 {
+	color: #444;
+	font-size: 24px;
+	font-weight: 400;
+}
+
+b,
+strong {
+	font-weight: bolder;
+}
+
+small {
+	font-size: 80%;
+}
+
+.required,
+.error {
+	color: #ca1551;
+	font-family: Arial;
+	font-weight: bold;
+}
+
+form {
+	font-size: inherit;
+}
+
+.pipe {
+	margin-right: 5px;
+	margin-left: 5px;
+}
+
+select {
+	color: #666;
+	height: 32px;
+	border: 1px solid #ddd;
+	padding: 6px;
+}
+
+input,
+textarea {
+	color: #666;
+	border: 1px solid #ddd;
+	display: block;
+	font-size: 1.1em;
+	margin-bottom: 10px;
+	padding: 10px;
+	text-align: left;
+	width: 100%;
+	border-radius: 4px;
+}
+
+input::placeholder,
+textarea::placeholder {
+	color: #ccc;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+	/*safari and chrome*/
+	select {
+		height: 40px;
+		line-height: 40px;
+	}
+}
+select::-moz-focus-inner {
+	/*Remove button padding in FF*/
+	border: 0;
+	padding: 0;
+}
+@-moz-document url-prefix() {
+	/* targets Firefox only */
+	select {
+		padding: 0px 0 !important;
+	}
+}
+@media screen\0 {
+	/* IE Hacks: targets IE 8, 9 and 10 */
+	select {
+		height: 40px;
+		line-height: 40px;
+	}
+}
+
+fieldset {
+	border: none;
+	margin-bottom: 8px;
+}
+
+legend {
+	font-size: 24px;
+	margin-bottom: 0;
+}
+
+label {
+	display: block;
+	margin: 0;
+}
+
+/* *********** buttons *********** */
+/*
+fa-minus-circle -> fa-chevron-up
+fa-plus-circle -> fa-chevron-down
+
+fas fa-star = add-to-schedule OUTLINE = f005 -- works
+far fa-star = add-to-schedule SOLID = f005  -- doesn't work
+
+content: '\2605';	==> SOLID star
+
+far fa-times-circle = delete-from-schedule OUTLINE = f057
+*/
+
+.btn-expand-item,
+.btn-add-to-schedule {
+	color: silver;
+}
+
+/* vertical space between buttons */
+.btn-expand-item + .btn-add-to-schedule {
+	margin-top: 30px;
+}
+
+.btn-basic {
+	order: 1px solid #aaa;
+	background-color: #eee;
+	font-size: 1.1em;
+	border-radius: 4px;
+	padding: 8px 12px;
+	font-weight: bold;
+}
+
+button,
+button i[class^='fa'] {
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+	margin: 0 auto;
+	transition: all 0.4s ease-in;
+	border: none;
+	background: none;
+	color: #000;
+}
+
+button:before {
+	content: '';
+	background-color: #034eab; /* button click color */
+	border-radius: 50%;
+	display: block;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	-webkit-transform: scale(0.001, 0.001);
+	transform: scale(0.001, 0.001);
+}
+button:focus {
+	color: #bd8400; /* darkgold */
+}
+button:focus:before {
+	-webkit-animation: effect_dylan 0.8s ease-out;
+	animation: effect_dylan 0.8s ease-out;
+}
+@-webkit-keyframes effect_dylan {
+	50% {
+		-webkit-transform: scale(1.5, 1.5);
+		transform: scale(1.5, 1.5);
+		opacity: 0;
+	}
+	99% {
+		-webkit-transform: scale(0.001, 0.001);
+		transform: scale(0.001, 0.001);
+		opacity: 0;
+	}
+	100% {
+		-webkit-transform: scale(0.001, 0.001);
+		transform: scale(0.001, 0.001);
+		opacity: 1;
+	}
+}
+@keyframes effect_dylan {
+	50% {
+		-webkit-transform: scale(1.5, 1.5);
+		transform: scale(1.5, 1.5);
+		opacity: 0;
+	}
+	99% {
+		-webkit-transform: scale(0.001, 0.001);
+		transform: scale(0.001, 0.001);
+		opacity: 0;
+	}
+	100% {
+		-webkit-transform: scale(0.001, 0.001);
+		transform: scale(0.001, 0.001);
+		opacity: 1;
+	}
+}
+
+/* mobile-first, when small */
+
+.item {
+	border-top: 2px solid #6daffe;
+	margin-bottom: 20px;
+	padding: 20px;
+}
+
+.flex-item-header-row {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	margin: 0;
+	padding: 0 -10px;
+}
+
+/* separate rows with colored header was #b3efff */
+.item > div.flex-item-header-row:nth-of-type(odd) {
+	background: #f0fbff;
+	margin: -20px -20px 20px -20px;
+	padding: 0 20px;
+}
+
+/*
+  .item:nth-of-type(odd):not(:last-child) {
+      border-bottom: 2px solid #e0e0e0;
+  }
+  */
+
+.toggle-content {
+	display: none;
+}
+.is-visible {
+	display: block;
+}
+.highlight {
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+	background: #fff;
+}
+.flex-row,
+.flex-footer-row.toggle-content.is-visible {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+.flex-col {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	align-self: flex-start;
+}
+.flex-col-then-row {
+	display: flex;
+	flex-direction: column;
+}
+
+/* space between divs */
+.flex-col-then-row > div {
+	padding-bottom: 15px;
+}
+
+.cell-fixed-width-50 {
+	flex: 0 0 50%;
+}
+.cell-fixed-width-25 {
+	flex: 0 0 25%;
+}
+
+.hide {
+	display: none;
+}
+
+.day-name {
+	text-transform: uppercase;
+	font-weight: 700;
+}
+.day-of-week {
+	text-transform: none;
+	color: #555;
+}
+.simple {
+	font-family: 'Roboto', sans-serif;
+}
+.title {
+	font-weight: 700;
+}
+.location,
+.time {
+	color: #444;
+}
+.day-right-border,
+.time-right-border {
+	border-right: 5px solid black;
+}
+
+.track:before {
+	content: '■';
+	margin-right: 5px;
+	font-size: 80px;
+	vertical-align: middle;
+	display: inline-block;
+	margin-top: -5px;
+}
+.track-text {
+	color: #000;
+}
+
+/* *********** colors *********** */
+.training-day {
+	color: #0797f9;
+}
+.border-training-day {
+	border-color: #0797f9;
+}
+.background-training-day {
+	background-color: #0797f9;
+}
+
+.general {
+	color: #320071;
+}
+.border-general {
+	border-color: #320071;
+}
+
+.business {
+	color: #1f8184;
+}
+.border-business {
+	border-color: #1f8184;
+}
+
+.create {
+	color: #227f10;
+}
+.border-create {
+	border-color: #227f10;
+}
+
+.share {
+	color: #b85900;
+}
+.border-share {
+	border-color: #b85900;
+}
+
+.integrate {
+	color: #af0d00;
+}
+.border-integrate {
+	border-color: #af0d00;
+}
+
+.fba {
+	color: #ffc200;
+}
+.border-fba {
+	border-color: #ffc200;
+}
+
+.customer {
+	color: #4da2a2;
+}
+.border-customer {
+	border-color: #4da2a2;
+}
+
+.sponsor {
+	color: #c200e0;
+}
+.border-sponsor {
+	border-color: #c200e0;
+}
+
+.vendor-session {
+	color: silver;
+}
+.border-vendor-session {
+	border-color: silver;
+}
+
+.description {
+	padding: 0;
+}
+
+.align-right {
+	text-align: right;
+}
+
+/* *********** media queries *********** */
+/* when wider */
+@media all and (min-width: 768px) {
+	.search-bar {
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+	}
+	.search-bar > div {
+		padding: 10px;
+	}
+	main {
+		margin: 0 50px;
+	}
+	.flex-col-then-row {
+		flex-direction: row;
+		align-items: flex-start;
+		align-self: flex-start;
+	}
+	.hide {
+		display: flex;
+	}
+
+	.flex-item-header-row {
+		display: none;
+	}
+	.track:before {
+		content: '■';
+		margin-right: 5px;
+		font-size: 80px;
+		vertical-align: middle;
+		display: inline-block;
+		margin-top: -40px;
+	}
+	.day-right-border {
+		border-right: 0;
+	}
+	.description {
+		padding-left: 10px; /* space to left of border */
+	}
+}
+
+/*      OBJECTIVES   */
+.objective-list {
+	list-style-type: disc;
+	list-style-position: outside;
+	margin-left: 20px;
+}
+
+/*      COMMENTS    */
+.sessions-list,
+.comment-list {
+	list-style-type: none;
+}
+
+.comment-form {
+	padding-top: 20px;
+	border-top: 2px solid #6daffe;
+}
+
+.comment-item {
+	border-top: 2px solid #6daffe;
+	margin-bottom: 20px;
+	cursor: pointer;
+}
+
+.comment-text {
+	font-family: 'Coming Soon', cursive;
+	font-size: 16px;
+	background: #fff;
+	border-radius: 4px;
+	padding-top: 10px;
+}
+
+p.comment-user {
+	margin: 0;
+	padding: 10px;
+}
+.comment-user {
+	/* use the color of the session track */
+	font-size: 10pt;
+	font-weight: 400;
+	background: #fff;
+	line-height: 1.5;
+}
+.comment-footer {
+	font-family: 'Roboto', sans-serif;
+	align-self: center;
+}
+
+.comment-btns > div {
+	padding-left: 10px;
+}
+
+.btn-cancel,
+.btn-save-comment,
+.btn-edit-comment,
+.btn-delete-comment {
+	border: 2px solid #ffcb5c; /* gold */
+	padding: 5px 10px;
+	border-radius: 4px;
+}
+
+.btn-save-comment,
+.btn-edit-comment,
+.btn-delete-comment {
+	background-color: #fff;
+}
+
+.btn-save-comment:hover,
+.btn-edit-comment:hover,
+.btn-delete-comment:hover {
+	background-color: #9e6c00;
+	color: #fff;
+}
+
+.btn-save-comment:disabled,
+.btn-save-comment[disabled] {
+	border: 1px solid #999999;
+	background-color: #cccccc;
+	color: #666666;
+}
+
+/*   RATING STARS FOR RADIO BUTTONS **** */
+
+div.stars {
+	display: inline-block;
+}
+
+input.star {
+	display: none;
+}
+
+label.star {
+	float: right;
+	padding: 10px;
+	font-size: 24px;
+	transition: all 0.2s;
+}
+
+input.star:checked ~ label.star:before {
+	content: '\2605';
+	/color: #fd4;
+	transition: all 0.25s;
+	font-weight: 900;
+}
+
+input.star-5:checked ~ label.star:before {
+	color: #fe7;
+	text-shadow: 0 0 20px #952;
+}
+
+input.star-1:checked ~ label.star:before {
+	color: #f62;
+}
+
+label.star:hover {
+	transform: rotate(-15deg) scale(1.3);
+}
+
+label.star:before {
+	content: '\f006';
+	font-family: FontAwesome;
+	font-weight: 200;
+}
+.developer-note {
+	margin: 0 auto;
+	text-align: center;
+	border: 1px solid red;
+}

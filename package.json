@@ -1,0 +1,53 @@
+{
+	"name": "sessionhero-app",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"start": "react-scripts start",
+		"prebuild": "CI=true react-scripts test --colors",
+		"build": "react-scripts build",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject",
+		"predeploy": "npm run build",
+		"deploy": "now ./build",
+		"postdeploy": "now alias -A ./build/now.json"
+	},
+	"dependencies": {
+		"@fortawesome/fontawesome-svg-core": "^1.2.25",
+		"@fortawesome/free-brands-svg-icons": "^5.11.2",
+		"@fortawesome/free-regular-svg-icons": "^5.7.2",
+		"@fortawesome/free-solid-svg-icons": "^5.11.2",
+		"@fortawesome/react-fontawesome": "^0.1.7",
+		"bcryptjs": "^2.4.3",
+		"classnames": "^2.2.6",
+		"jsonwebtoken": "^8.5.1",
+		"jwt-decode": "^2.2.0",
+		"prop-types": "^15.7.2",
+		"query-string": "^6.9.0",
+		"react": "^16.8.1",
+		"react-dom": "^16.8.1",
+		"react-router-dom": "^4.3.1",
+		"react-scripts": "^3.2.0"
+	},
+	"eslintConfig": {
+		"extends": "react-app"
+	},
+	"browserslist": [
+		">0.2%",
+		"not dead",
+		"not ie <= 11",
+		"not op_mini all"
+	],
+	"devDependencies": {
+		"@fortawesome/fontawesome-free": "^5.11.2",
+		"enzyme": "^3.10.0",
+		"enzyme-adapter-react-16": "^1.15.1",
+		"enzyme-to-json": "^3.4.3",
+		"react-test-renderer": "^16.11.0",
+		"typescript": "^3.7.2"
+	},
+	"contributors": [
+		"Tami Williams <tami@asktami.com>"
+	],
+	"license": "MIT"
+}

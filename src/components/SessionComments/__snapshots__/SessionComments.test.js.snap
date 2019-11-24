@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SessionComments component renders a SessionComments by default 1`] = `
+<ul
+  className="comment-list"
+/>
+`;
+
+exports[`SessionComments component renders the SessionComments given props 1`] = `
+<ul
+  className="comment-list"
+/>
+`;
