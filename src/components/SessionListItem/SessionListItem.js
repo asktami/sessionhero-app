@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
 	getColor,
 	getTime,
+	convertDate,
 	getDayNumber,
 	getDayName
 } from '../../components/Utils/Utils';
@@ -24,34 +25,34 @@ export default class SessionListItem extends Component {
 		// create an array that is just that record from sessionList
 		// add that array to the existing scheduleList
 
-		this.context.sessionList.forEach(session => {
-			if (session.id === sessionId) {
-				session.userId = 1;
-			}
-		});
+		// this.context.sessionList.forEach(session => {
+		// 	if (session.id === sessionId) {
+		// 		session.userId = 1;
+		// 	}
+		// });
 
-		let newScheduleList = this.context.sessionList.filter(
-			session => session.userId === userId
-		);
+		// let newScheduleList = this.context.sessionList.filter(
+		// 	session => session.userId === userId
+		// );
 
-		this.context.setScheduleList(newScheduleList);
+		// this.context.setScheduleList(newScheduleList);
 
-		console.log('after ADD new scheduleList = ', this.context.scheduleList);
+		// console.log('after ADD new scheduleList = ', this.context.scheduleList);
 
 		// FOR REAL DB ONLY
-		// Promise.all([
-		// 	SessionApiService.addScheduleItem(sessionId, userId),
-		// 	SessionApiService.getSchedule()
-		// ])
-		// 	.then(results => {
-		// 		const schedule = results[1];
+		Promise.all([
+			SessionApiService.addScheduleItem(sessionId, userId),
+			SessionApiService.getSchedule()
+		])
+			.then(results => {
+				const schedule = results[1];
 
-		// 		this.context.setScheduleList(schedule);
+				this.context.setScheduleList(schedule);
 
-		// 		// in postgres use joins instead
-		// 		this.updateSessionList();
-		// 	})
-		// 	.catch(this.context.setError);
+				// in postgres use joins instead
+				this.updateSessionList();
+			})
+			.catch(this.context.setError);
 	};
 
 	removeFromSchedule = sessionId => {
@@ -61,7 +62,7 @@ export default class SessionListItem extends Component {
 		// set removed sessionList userId to blank
 		// remove session from schedule  = create new scheduleList from sessionList
 
-		this.context.sessionList.map(session => {
+		this.context.sessionList.forEach(session => {
 			if (session.id === sessionId) {
 				session.userId = '';
 			}
@@ -149,9 +150,9 @@ export default class SessionListItem extends Component {
 							}
 						>
 							<div>
-								{getTime(session.date, session.time_start)}
+								{getTime(convertDate(session.date), session.time_start)}
 								<br />
-								{getTime(session.date, session.time_end)}
+								{getTime(convertDate(session.date), session.time_end)}
 							</div>
 						</div>
 
