@@ -36,11 +36,16 @@ export default class ScheduleListPage extends Component {
 	}
 
 	render() {
-		const { error } = this.context;
+		const { error, scheduleList } = this.context;
 		return (
 			<section>
 				{error ? (
-					<p className="error">There was an error, try again {error}</p>
+					<p className="error">
+						There was an error, try again <br />
+						{error}
+					</p>
+				) : scheduleList.length === 0 ? (
+					<p>You haven't added any sessions to your schedule yet.</p>
 				) : (
 					<ul className="sessions-list">{this.renderSchedule()}</ul>
 				)}

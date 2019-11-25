@@ -82,9 +82,14 @@ export default class SessionListPage extends Component {
 
 		return (
 			<section>
+				{this.context.loginUserId && (
+					<p>loginUserId: {this.context.loginUserId}</p>
+				)}
 				{error ? (
 					<p className="error">
-						There was an error, try again.{JSON.stringify(error)}
+						There was an error, try again.
+						<br />
+						{error}
 					</p>
 				) : (
 					<ul className="sessions-list">{this.renderSessions()}</ul>
