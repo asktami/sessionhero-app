@@ -30,6 +30,11 @@ export function getTime(dateStr, timeStr, locale = 'en-US') {
 	});
 }
 
+// convert date from YYYY-MM-DD to MM-DD-YYYY
+export function convertDate(dateStr) {
+	return Intl.DateTimeFormat('en-US').format(new Date(dateStr));
+}
+
 // to get dayNumber
 export function getDayNumber(dateStr, locale = 'en-US') {
 	var date = new Date(dateStr);
