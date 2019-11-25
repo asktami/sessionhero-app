@@ -12,8 +12,10 @@ export default class SessionListPage extends Component {
 		this.context.clearFilters();
 
 		Promise.all([
-			// TBD only get Schedule IF LOGGED IN, otherwise UNAUTHORIZED!!!
-			SessionApiService.getSchedule(),
+			// only gets Schedule if logged in
+			// sessionList is combined with loginUser's schedule to have loginUserId on applicable session records (to show stars)
+			// scheduleList is combined with sessions to show all session info
+			SessionApiService.getSchedule(this.context.loginUserId),
 			SessionApiService.getSessions()
 		])
 			.then(results => {
@@ -22,32 +24,8 @@ export default class SessionListPage extends Component {
 
 				this.context.setScheduleList(schedule);
 				this.context.setSessionList(sessions);
-
-				// in postgres use joins instead
-				this.updateSessionList();
 			})
 			.catch(this.context.setError);
-	}
-
-	// TBD update sessionList:
-	// combine sessionList and scheduleList so have login userId in session record
-	// in postgres use joins instead
-	updateSessionList() {
-		const { sessionList = [], scheduleList = [] } = this.context;
-
-		// automatically updates sessionList in context
-		sessionList.forEach(session => {
-			scheduleList.forEach(schedule => {
-				if (schedule.sessionId === session.id) {
-					session.userId = schedule.userId;
-				}
-			});
-		});
-
-		// to update scheduleList in context
-		let newScheduleList = sessionList.filter(session => session.userId === 1);
-
-		this.context.setScheduleList(newScheduleList);
 	}
 
 	renderSessions() {
@@ -77,11 +55,13 @@ export default class SessionListPage extends Component {
 	render() {
 		const { error } = this.context;
 
+		console.log('loginUserId in context = ', this.context.loginUserId);
 		console.log('sessionList in context = ', this.context.sessionList);
 		console.log('scheduleList in context = ', this.context.scheduleList);
 
 		return (
 			<section>
+				{/* TBD debug loginUserId */}
 				{this.context.loginUserId && (
 					<p>loginUserId: {this.context.loginUserId}</p>
 				)}
@@ -89,7 +69,7 @@ export default class SessionListPage extends Component {
 					<p className="error">
 						There was an error, try again.
 						<br />
-						{error}
+						{JSON.stringify(error)}
 					</p>
 				) : (
 					<ul className="sessions-list">{this.renderSessions()}</ul>

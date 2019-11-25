@@ -42,8 +42,8 @@ export class AppProvider extends Component {
 
 	setError = error => {
 		// TBD How to get the value of the error!???
+		// How do I set error in the API so I can get the message via error.message?
 		console.table(error);
-		console.log('inside AppContext setError', error);
 
 		// {
 		// 	Object.values(error)[0].message;
@@ -52,9 +52,9 @@ export class AppProvider extends Component {
 		// 	console.log('Object.values =', Object.values(error)[0].message);
 		// }
 
-		// this.setState({ error });
+		this.setState({ error });
 
-		this.setState({ error: Object.values(error)[0].message });
+		// this.setState({ error: Object.values(error)[0].message });
 	};
 
 	clearError = () => {
@@ -62,6 +62,8 @@ export class AppProvider extends Component {
 	};
 
 	setLoginUserId = id => {
+		// TBD WHY DO I KEEP LOSING loginUserId???
+		// what's the best way to keep it since i need it to get schedule?
 		this.setState({ loginUserId: id });
 	};
 

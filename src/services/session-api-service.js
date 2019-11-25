@@ -1,11 +1,6 @@
 import config from '../config';
 import TokenService from './token-service';
 
-console.log(
-	'CLIENT inside session-api-service authToken = ',
-	TokenService.getAuthToken()
-);
-
 const SessionApiService = {
 	getSessions() {
 		return fetch(`${config.API_ENDPOINT}/sessions`, {
@@ -17,10 +12,10 @@ const SessionApiService = {
 			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
 		);
 	},
-	getSchedule() {
-		// TBD only get schedule if LOGGED IN, otherwise unauthorized!!!
-		if (false) {
-			return fetch(`${config.API_ENDPOINT}/schedule`, {
+	getSchedule(loginUserId) {
+		// only get schedule if have loginUserId
+		if (loginUserId) {
+			return fetch(`${config.API_ENDPOINT}/schedule/users/${loginUserId}`, {
 				headers: {
 					'content-type': 'application/json',
 					authorization: `bearer ${TokenService.getAuthToken()}`
@@ -29,7 +24,7 @@ const SessionApiService = {
 				!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
 			);
 		} else {
-			// TBD need to return empty array
+			// not logged in
 			return [];
 		}
 	},
