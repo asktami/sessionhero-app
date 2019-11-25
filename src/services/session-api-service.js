@@ -1,11 +1,17 @@
 import config from '../config';
 import TokenService from './token-service';
 
+console.log(
+	'CLIENT inside session-api-service authToken = ',
+	TokenService.getAuthToken()
+);
+
 const SessionApiService = {
 	getSessions() {
 		return fetch(`${config.API_ENDPOINT}/sessions`, {
 			headers: {
-				'content-type': 'application/json'
+				'content-type': 'application/json',
+				authorization: `bearer ${TokenService.getAuthToken()}`
 			}
 		}).then(res =>
 			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
@@ -16,7 +22,8 @@ const SessionApiService = {
 		if (false) {
 			return fetch(`${config.API_ENDPOINT}/schedule`, {
 				headers: {
-					'content-type': 'application/json'
+					'content-type': 'application/json',
+					authorization: `bearer ${TokenService.getAuthToken()}`
 				}
 			}).then(res =>
 				!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
