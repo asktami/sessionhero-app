@@ -121,18 +121,6 @@ class SearchBar extends Component {
 						</Link>
 					</div>
 				</form>
-				<br />
-				<div className="developer-note">
-					Note: during this test:
-					<br />
-					Clicking on the "Sessions" link loads default data overriding any
-					records added/removed from schedule by clicking on the stars.
-					<br />
-					Stars also won't work on the Session Detail page.
-					<br />
-					Reloading the browser window also resets everything to the default
-					data.
-				</div>
 			</>
 		);
 	}
