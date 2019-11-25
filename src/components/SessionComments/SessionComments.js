@@ -22,13 +22,13 @@ export default class SessionContents extends Component {
 									<SessionStarRating rating={comment.rating} />
 									<br />
 									<span className="comment-user sponsor">
-										{comment.userId === 1
+										{comment.user_id === 1
 											? 'LoggedIn User Created This Comment'
 											: 'OtherFirst OtherLast'}
 									</span>
 								</div>
 								{/* TBD */}
-								{comment.userId === 1 ? (
+								{comment.user_id === 1 ? (
 									<div className="flex-row comment-btns">
 										<div>
 											<Link

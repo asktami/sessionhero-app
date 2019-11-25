@@ -8,7 +8,7 @@ describe(`SessionListItem component`, () => {
 	const props = {
 		pathname: '',
 		session: {
-			userId: 1,
+			user_id: 1,
 			track: 'Business',
 			day: 'tue',
 			date: '8/6/2019',

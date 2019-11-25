@@ -15,14 +15,14 @@ export default class SessionPage extends Component {
 	static contextType = AppContext;
 
 	componentDidMount() {
-		const { sessionId } = this.props.match.params;
+		const { session_id } = this.props.match.params;
 		this.context.clearError();
 
-		SessionApiService.getSession(sessionId)
+		SessionApiService.getSession(session_id)
 			.then(this.context.setSession)
 			.catch(this.context.setError);
 
-		SessionApiService.getSessionComments(sessionId)
+		SessionApiService.getSessionComments(session_id)
 			.then(this.context.setComments)
 			.catch(this.context.setError);
 	}

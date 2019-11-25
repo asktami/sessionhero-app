@@ -8,7 +8,7 @@ describe(`SessionComments component`, () => {
 	const props = {
 		match: {
 			params: {
-				sessionId: 'BUS04'
+				session_id: 'BUS04'
 			}
 		},
 		comments: [
@@ -17,16 +17,16 @@ describe(`SessionComments component`, () => {
 				text: 'This thing is amazing.',
 				rating: 4,
 				date_created: '2019-10-31 23:14:12.649275',
-				sessionId: 'BUS04',
-				userId: 1
+				session_id: 'BUS04',
+				user_id: 1
 			},
 			{
 				id: 2,
 				text: 'Put a bird on it!',
 				rating: 4,
 				date_created: '2019-10-31 23:14:12.649275',
-				sessionId: 'BUS04',
-				userId: 1
+				session_id: 'BUS04',
+				user_id: 1
 			}
 		]
 	};

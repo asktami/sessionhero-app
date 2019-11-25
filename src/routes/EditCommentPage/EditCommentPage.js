@@ -14,7 +14,7 @@ class EditComment extends React.Component {
 		id: '',
 		text: '',
 		rating: '',
-		sessionId: '',
+		session_id: '',
 		errors: {
 			text: '',
 			rating: ''
@@ -58,7 +58,7 @@ class EditComment extends React.Component {
 					id: responseData.id,
 					text: responseData.text,
 					rating: responseData.rating,
-					sessionId: responseData.sessionId
+					session_id: responseData.session_id
 				});
 			})
 			.catch(error => {
@@ -114,7 +114,7 @@ class EditComment extends React.Component {
 	};
 
 	handleClickCancel = () => {
-		this.props.history.push(`/sessions/${this.state.sessionId}`);
+		this.props.history.push(`/sessions/${this.state.session_id}`);
 	};
 
 	resetFields = newFields => {
@@ -122,7 +122,7 @@ class EditComment extends React.Component {
 			id: newFields.id || '',
 			text: newFields.text || '',
 			rating: newFields.rating || '',
-			sessionId: newFields.sessionId || ''
+			session_id: newFields.session_id || ''
 		});
 	};
 

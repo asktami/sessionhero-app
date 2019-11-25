@@ -44,14 +44,14 @@ class App extends Component {
 						<PublicOnlyRoute path={'/register'} component={RegistrationPage} />
 
 						<PrivateRoute
-							path={'/sessions/:sessionId'}
+							path={'/sessions/:session_id'}
 							component={SessionPage}
 						/>
 
 						<PrivateRoute path={'/schedule'} component={ScheduleListPage} />
 
 						<PrivateRoute
-							path={'/comments/:commentId'}
+							path={'/comments/:comment_id'}
 							component={EditCommentPage}
 						/>
 

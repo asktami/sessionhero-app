@@ -12,7 +12,7 @@ const AuthApiService = {
 			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
 		);
 
-		// grab logged in userId from res.json()
+		// grab logged in user_id from res.json()
 	},
 
 	postUser(user) {

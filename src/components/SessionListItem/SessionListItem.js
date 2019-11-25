@@ -15,24 +15,24 @@ import './SessionListItem.css';
 export default class SessionListItem extends Component {
 	static contextType = AppContext;
 
-	// ALWAYS use loggedIn userId
-	addToSchedule = (sessionId, userId = 1) => {
+	// ALWAYS use loggedIn user_id
+	addToSchedule = (session_id, user_id = 1) => {
 		console.log('---------- add to schedule');
 
 		// FAKE IT WITH STATE
 		//  session added to schedule
-		// find that sessionId in sessionList
+		// find that session_id in sessionList
 		// create an array that is just that record from sessionList
 		// add that array to the existing scheduleList
 
 		// this.context.sessionList.forEach(session => {
-		// 	if (session.id === sessionId) {
-		// 		session.userId = 1;
+		// 	if (session.id === session_id) {
+		// 		session.user_id = 1;
 		// 	}
 		// });
 
 		// let newScheduleList = this.context.sessionList.filter(
-		// 	session => session.userId === userId
+		// 	session => session.user_id === user_id
 		// );
 
 		// this.context.setScheduleList(newScheduleList);
@@ -41,7 +41,7 @@ export default class SessionListItem extends Component {
 
 		// FOR REAL DB ONLY
 		Promise.all([
-			SessionApiService.addScheduleItem(sessionId, userId),
+			SessionApiService.addScheduleItem(session_id, user_id),
 			SessionApiService.getSchedule()
 		])
 			.then(results => {
@@ -55,21 +55,21 @@ export default class SessionListItem extends Component {
 			.catch(this.context.setError);
 	};
 
-	removeFromSchedule = sessionId => {
+	removeFromSchedule = session_id => {
 		console.log('---------- remove from schedule');
 
 		// FAKE IT WITH STATE
-		// set removed sessionList userId to blank
+		// set removed sessionList user_id to blank
 		// remove session from schedule  = create new scheduleList from sessionList
 
 		this.context.sessionList.forEach(session => {
-			if (session.id === sessionId) {
-				session.userId = '';
+			if (session.id === session_id) {
+				session.user_id = '';
 			}
 		});
 
 		let newScheduleList = this.context.scheduleList.filter(
-			session => session.id !== sessionId
+			session => session.id !== session_id
 		);
 
 		this.context.setScheduleList(newScheduleList);
@@ -78,7 +78,7 @@ export default class SessionListItem extends Component {
 
 		// FOR REAL DB ONLY
 		// Promise.all([
-		// 	SessionApiService.deleteScheduleItem(scheduleId),
+		// 	SessionApiService.deleteScheduleItem(schedule_id),
 		// 	SessionApiService.getSchedule()
 		// ])
 		// 	.then(results => {
@@ -99,8 +99,8 @@ export default class SessionListItem extends Component {
 		// automatically updates sessionList in context
 		sessionList.forEach(session => {
 			scheduleList.forEach(schedule => {
-				if (schedule.sessionId === session.id) {
-					session.userId = schedule.userId;
+				if (schedule.session_id === session.id) {
+					session.user_id = schedule.user_id;
 				}
 			});
 		});
@@ -108,7 +108,7 @@ export default class SessionListItem extends Component {
 		console.log('sessionListItem update sessionList = ', sessionList);
 
 		// to update scheduleList in context
-		let newScheduleList = sessionList.filter(session => session.userId === 1);
+		let newScheduleList = sessionList.filter(session => session.user_id === 1);
 
 		console.log('sessionListItem update newScheduleList = ', newScheduleList);
 
@@ -191,14 +191,14 @@ export default class SessionListItem extends Component {
 							</button>
 						) : null}
 
-						{/* need to be loggedIn AND session.userId === loggedIn userId */}
-						{parseInt(session.userId) === 1 ? (
+						{/* need to be loggedIn AND session.user_id === loggedIn user_id */}
+						{parseInt(session.user_id) === 1 ? (
 							<button
 								className="btn-add-to-schedule"
 								aria-label="add-session-to-schedule-button"
 								onClick={() => this.removeFromSchedule(session.id)}
 							>
-								{/* userId = {session.userId} <br /> */}
+								{/* user_id = {session.user_id} <br /> */}
 								<FontAwesomeIcon icon="star" size="2x" />
 							</button>
 						) : (
@@ -207,7 +207,7 @@ export default class SessionListItem extends Component {
 								aria-label="add-session-to-schedule-button"
 								onClick={() => this.addToSchedule(session.id)}
 							>
-								{/* userId = {session.userId} <br /> */}
+								{/* user_id = {session.user_id} <br /> */}
 								<FontAwesomeIcon icon={['far', 'star']} size="2x" />
 							</button>
 						)}

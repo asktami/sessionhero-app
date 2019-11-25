@@ -28,8 +28,8 @@ const SessionApiService = {
 			return [];
 		}
 	},
-	getSession(sessionId) {
-		return fetch(`${config.API_ENDPOINT}/sessions/${sessionId}`, {
+	getSession(session_id) {
+		return fetch(`${config.API_ENDPOINT}/sessions/${session_id}`, {
 			headers: {
 				'content-type': 'application/json',
 				authorization: `bearer ${TokenService.getAuthToken()}`
@@ -38,8 +38,8 @@ const SessionApiService = {
 			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
 		);
 	},
-	getSessionComments(sessionId) {
-		return fetch(`${config.API_ENDPOINT}/sessions/${sessionId}/comments`, {
+	getSessionComments(session_id) {
+		return fetch(`${config.API_ENDPOINT}/sessions/${session_id}/comments`, {
 			headers: {
 				'content-type': 'application/json',
 				authorization: `bearer ${TokenService.getAuthToken()}`
@@ -76,7 +76,7 @@ const SessionApiService = {
 	// 			id: responseData.id,
 	// 			text: responseData.text,
 	// 			rating: responseData.rating,
-	// 			sessionId: responseData.sessionId
+	// 			session_id: responseData.session_id
 	// 		});
 	// 	})
 	// 	.catch(error => {
@@ -108,7 +108,7 @@ const SessionApiService = {
 			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
 		);
 	},
-	addComment(sessionId, text, rating) {
+	addComment(session_id, text, rating) {
 		return fetch(`${config.API_ENDPOINT}/comments`, {
 			method: 'POST',
 			headers: {
@@ -116,7 +116,7 @@ const SessionApiService = {
 				authorization: `bearer ${TokenService.getAuthToken()}`
 			},
 			body: JSON.stringify({
-				sessionId: sessionId,
+				session_id: session_id,
 				rating,
 				text
 			})
@@ -125,7 +125,7 @@ const SessionApiService = {
 		);
 	},
 
-	addScheduleItem(sessionId, userId) {
+	addScheduleItem(session_id, user_id) {
 		return fetch(`${config.API_ENDPOINT}/schedule`, {
 			method: 'POST',
 			headers: {
@@ -133,16 +133,16 @@ const SessionApiService = {
 				authorization: `bearer ${TokenService.getAuthToken()}`
 			},
 			body: JSON.stringify({
-				sessionId: sessionId,
-				userId: userId
+				session_id: session_id,
+				user_id: user_id
 			})
 		}).then(res =>
 			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
 		);
 	},
 
-	deleteScheduleItem(scheduleId) {
-		return fetch(`${config.API_ENDPOINT}/schedule/${scheduleId}`, {
+	deleteScheduleItem(schedule_id) {
+		return fetch(`${config.API_ENDPOINT}/schedule/${schedule_id}`, {
 			method: 'DELETE',
 			headers: {
 				'content-type': 'application/json',
