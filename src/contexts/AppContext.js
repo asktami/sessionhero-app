@@ -4,6 +4,8 @@ const AppContext = React.createContext({
 	sessionList: [],
 	scheduleList: [],
 	error: null,
+	loginUserId: '',
+	setLoginUserId: () => {},
 	setError: () => {},
 	clearError: () => {},
 	setSessionList: () => {},
@@ -26,6 +28,7 @@ export default AppContext;
 
 export class AppProvider extends Component {
 	state = {
+		loginUserId: '',
 		sessionList: [],
 		scheduleList: [],
 		error: null,
@@ -42,11 +45,24 @@ export class AppProvider extends Component {
 		console.table(error);
 		console.log('inside AppContext setError', error);
 
-		this.setState({ error });
+		// {
+		// 	Object.values(error)[0].message;
+		// }
+		// {
+		// 	console.log('Object.values =', Object.values(error)[0].message);
+		// }
+
+		// this.setState({ error });
+
+		this.setState({ error: Object.values(error)[0].message });
 	};
 
 	clearError = () => {
 		this.setState({ error: null });
+	};
+
+	setLoginUserId = id => {
+		this.setState({ loginUserId: id });
 	};
 
 	setSessionList = sessionList => {
@@ -130,6 +146,8 @@ export class AppProvider extends Component {
 			error: this.state.error,
 			setError: this.setError,
 			clearError: this.clearError,
+			loginUserId: this.state.loginUserId,
+			setLoginUserId: this.setLoginUserId,
 			sessionList: this.state.sessionList,
 			scheduleList: this.state.scheduleList,
 			setSessionList: this.setSessionList,

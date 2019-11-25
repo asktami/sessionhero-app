@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-
+import AppContext from '../../contexts/AppContext';
 import TokenService from '../../services/token-service';
 import AuthApiService from '../../services/auth-api-service';
 
 export default class LoginForm extends Component {
+	static contextType = AppContext;
+
 	static defaultProps = {
 		onLoginSuccess: () => {}
 	};
@@ -40,6 +42,12 @@ export default class LoginForm extends Component {
 			.then(res => {
 				username.value = '';
 				password.value = '';
+
+				this.context.setLoginUserId(res.userId);
+
+				console.log('login form res.userId = ', res.userId);
+				console.log('login form result = ', JSON.stringify(res));
+
 				TokenService.saveAuthToken(res.authToken);
 				this.props.onLoginSuccess();
 			})
@@ -62,14 +70,6 @@ export default class LoginForm extends Component {
 					<input required name="password" type="password" id="password" />
 				</div>
 				<button className="btn-basic">Login</button>
-
-				<br />
-				<br />
-				<div className="developer-note">
-					Note: during this test:
-					<br />
-					You can login with ANY username and password
-				</div>
 			</form>
 		);
 	}
