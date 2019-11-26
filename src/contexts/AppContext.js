@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
 const AppContext = React.createContext({
+	setLoginUserId: () => {},
+	loginUserId: '',
 	sessionList: [],
 	scheduleList: [],
 	error: null,
@@ -26,6 +28,7 @@ export default AppContext;
 
 export class AppProvider extends Component {
 	state = {
+		loginUserId: '',
 		sessionList: [],
 		scheduleList: [],
 		error: null,
@@ -35,6 +38,10 @@ export class AppProvider extends Component {
 		expandAll: false,
 		session: [],
 		comments: []
+	};
+
+	setLoginUserId = id => {
+		this.setState({ loginUserId: id });
 	};
 
 	setError = error => {
@@ -136,6 +143,8 @@ export class AppProvider extends Component {
 
 	render() {
 		const value = {
+			setLoginUserId: this.setLoginUserId,
+			loginUserId: this.state.loginUserId,
 			error: this.state.error,
 			setError: this.setError,
 			clearError: this.clearError,

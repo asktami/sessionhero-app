@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import AppContext from '../../contexts/AppContext';
+
+import TokenService from '../../services/token-service';
 import SessionApiService from '../../services/session-api-service';
+
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -116,7 +119,7 @@ export default class SessionListItem extends Component {
 	}
 
 	render() {
-		const { setToggleId, toggleId, expandAll } = this.context;
+		const { loginUserId, setToggleId, toggleId, expandAll } = this.context;
 		const { session, pathname } = this.props;
 
 		return (
@@ -192,25 +195,31 @@ export default class SessionListItem extends Component {
 						) : null}
 
 						{/* need to be loggedIn AND session.user_id === loggedIn user_id */}
-						{parseInt(session.user_id) === 1 ? (
+
+						{loginUserId && session.user_id === loginUserId ? (
 							<button
-								className="btn-add-to-schedule"
+								className="btn-remove-from-schedule"
 								aria-label="add-session-to-schedule-button"
 								onClick={() => this.removeFromSchedule(session.id)}
 							>
-								{/* user_id = {session.user_id} <br /> */}
-								<FontAwesomeIcon icon="star" size="2x" />
+								FILLED user_id = {session.user_id}, has token ={' '}
+								{TokenService.hasAuthToken()} <br />
+								<FontAwesomeIcon icon={['fas', 'star']} size="2x" />
 							</button>
-						) : (
+						) : null}
+
+						{loginUserId && session.user_id !== loginUserId ? (
 							<button
 								className="btn-add-to-schedule"
 								aria-label="add-session-to-schedule-button"
 								onClick={() => this.addToSchedule(session.id)}
 							>
-								{/* user_id = {session.user_id} <br /> */}
+								user_id = {session.user_id}, has token ={' '}
+								{TokenService.hasAuthToken()}
+								<br />
 								<FontAwesomeIcon icon={['far', 'star']} size="2x" />
 							</button>
-						)}
+						) : null}
 					</div>
 				</div>
 

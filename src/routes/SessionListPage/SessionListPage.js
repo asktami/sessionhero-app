@@ -68,6 +68,8 @@ export default class SessionListPage extends Component {
 
 		console.log('scheduleList in context = ', this.context.scheduleList);
 
+		console.log('loginUserId in context = ', this.context.loginUserId);
+
 		return (
 			<section>
 				{error ? (

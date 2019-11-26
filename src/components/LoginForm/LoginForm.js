@@ -41,6 +41,10 @@ export default class LoginForm extends Component {
 				username.value = '';
 				password.value = '';
 
+				console.log('loginForm loginUserId = ', JSON.stringify(res.user_id));
+				// save loginUserId
+				this.context.setLoginUserId(res.user_id);
+
 				TokenService.saveAuthToken(res.authToken);
 				this.props.onLoginSuccess();
 			})
