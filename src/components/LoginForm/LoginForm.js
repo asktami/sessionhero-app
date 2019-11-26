@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import AppContext from '../../contexts/AppContext';
 import TokenService from '../../services/token-service';
 import AuthApiService from '../../services/auth-api-service';
 
 export default class LoginForm extends Component {
-	static contextType = AppContext;
-
 	static defaultProps = {
 		onLoginSuccess: () => {}
 	};
@@ -42,11 +39,6 @@ export default class LoginForm extends Component {
 			.then(res => {
 				username.value = '';
 				password.value = '';
-
-				this.context.setLoginUserId(res.user_id);
-
-				console.log('login form res.user_id = ', res.user_id);
-				console.log('login form result = ', JSON.stringify(res));
 
 				TokenService.saveAuthToken(res.authToken);
 				this.props.onLoginSuccess();

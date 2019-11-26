@@ -4,8 +4,6 @@ const AppContext = React.createContext({
 	sessionList: [],
 	scheduleList: [],
 	error: null,
-	loginUserId: '',
-	setLoginUserId: () => {},
 	setError: () => {},
 	clearError: () => {},
 	setSessionList: () => {},
@@ -28,7 +26,6 @@ export default AppContext;
 
 export class AppProvider extends Component {
 	state = {
-		loginUserId: '',
 		sessionList: [],
 		scheduleList: [],
 		error: null,
@@ -59,12 +56,6 @@ export class AppProvider extends Component {
 
 	clearError = () => {
 		this.setState({ error: null });
-	};
-
-	setLoginUserId = id => {
-		// TBD WHY DO I KEEP LOSING loginUserId???
-		// what's the best way to keep it since i need it to get schedule?
-		this.setState({ loginUserId: id });
 	};
 
 	setSessionList = sessionList => {
@@ -148,8 +139,6 @@ export class AppProvider extends Component {
 			error: this.state.error,
 			setError: this.setError,
 			clearError: this.clearError,
-			loginUserId: this.state.loginUserId,
-			setLoginUserId: this.setLoginUserId,
 			sessionList: this.state.sessionList,
 			scheduleList: this.state.scheduleList,
 			setSessionList: this.setSessionList,
