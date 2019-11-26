@@ -15,7 +15,7 @@ export default class SessionListPage extends Component {
 
 		// Promise.all([
 		// 	// only gets Schedule if logged in
-		// 	// sessionList is combined with loginUser's schedule to have loginUserId on applicable session records (to show stars)
+		// 	// sessionList is combined with loginUser's schedule to have loginuser_id on applicable session records (to show stars)
 		// 	// scheduleList is combined with sessions to show all session info
 		// 	SessionApiService.getSessions(),
 		// 	SessionApiService.getSchedule()
@@ -27,14 +27,46 @@ export default class SessionListPage extends Component {
 		// 	this.context.setScheduleList(schedule);
 		// });
 
-		SessionApiService.getSessions()
-			.then(this.context.setSessionList)
-			.catch(this.context.setError);
+		// SessionApiService.getSessions()
+		// 	.then(this.context.setSessionList)
+		// 	.catch(this.context.setError);
 
 		// SessionApiService.getSessions()
 		// .then(this.context.setSessionList)
 		// .catch(this.context.setError)
 		// .then(schedulelist => this.context.setScheduleList(schedulelist)).catch(this.context.setError)
+
+		Promise.all([
+			SessionApiService.getSchedule(),
+			SessionApiService.getSessions()
+		])
+			.then(results => {
+				const schedule = results[0];
+				const sessions = results[1];
+
+				this.context.setScheduleList(schedule);
+				this.context.setSessionList(sessions);
+
+				// in postgres use joins instead
+				this.updateSessionList();
+			})
+			.catch(this.context.setError);
+	}
+
+	// TBD update sessionList:
+	// combine sessionList and scheduleList so have loginUserId in session record
+	// in postgres use joins instead
+	updateSessionList() {
+		const { sessionList = [], scheduleList = [] } = this.context;
+
+		// automatically updates sessionList in context
+		sessionList.forEach(session => {
+			scheduleList.forEach(schedule => {
+				if (schedule.session_id === session.id) {
+					session.user_id = schedule.user_id;
+				}
+			});
+		});
 	}
 
 	renderSessions() {

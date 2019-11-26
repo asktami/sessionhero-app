@@ -95,8 +95,8 @@ class EditComment extends React.Component {
 		if (name === 'rating') {
 			if (value.length === 0) {
 				err = 'You must enter a rating';
-			} else if (!Number.isInteger(value) || value < 0 || value > 5) {
-				err = 'The rating must be a number between 0 and 5';
+			} else if (!Number.isInteger(value) || value < 1 || value > 5) {
+				err = 'The rating must be a number between 1 and 5';
 			}
 		}
 

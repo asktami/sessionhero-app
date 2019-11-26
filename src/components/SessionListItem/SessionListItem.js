@@ -215,7 +215,7 @@ export default class SessionListItem extends Component {
 								onClick={() => this.addToSchedule(session.id)}
 							>
 								user_id = {session.user_id}, has token ={' '}
-								{TokenService.hasAuthToken()}
+								{TokenService.hasAuthToken()} <br />
 								<br />
 								<FontAwesomeIcon icon={['far', 'star']} size="2x" />
 							</button>
