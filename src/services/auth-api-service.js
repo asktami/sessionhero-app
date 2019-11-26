@@ -52,11 +52,11 @@ const AuthApiService = {
 				// use context inside functional component
 
 				// IF I TURN THIS ON IT STOPS LOGIN FROM CONTINUING!!! and does NOT load the schedule!!!
-				// const context = useContext(AppContext);
+				const context = useContext(AppContext);
 
-				// SessionApiService.getSchedule()
-				// 	.then(context.setScheduleList)
-				// 	.catch(context.setError);
+				SessionApiService.getSchedule()
+					.then(context.setScheduleList)
+					.catch(context.setError);
 
 				console.log('auth-api-service - GOT HERE 2');
 				return res;
