@@ -11,20 +11,25 @@ export default class SessionListPage extends Component {
 		this.context.clearError();
 		this.context.clearFilters();
 
-		Promise.all([
-			// only gets Schedule if logged in
-			// sessionList is combined with loginUser's schedule to have loginUserId on applicable session records (to show stars)
-			// scheduleList is combined with sessions to show all session info
-			SessionApiService.getSchedule(this.context.loginUserId),
-			SessionApiService.getSessions()
-		])
-			.then(results => {
-				const schedule = results[0];
-				const sessions = results[1];
+		// get Schecule on login not on SessionsList
 
-				this.context.setScheduleList(schedule);
-				this.context.setSessionList(sessions);
-			})
+		// Promise.all([
+		// 	// only gets Schedule if logged in
+		// 	// sessionList is combined with loginUser's schedule to have loginUserId on applicable session records (to show stars)
+		// 	// scheduleList is combined with sessions to show all session info
+		// 	SessionApiService.getSessions(),
+		// 	SessionApiService.getSchedule()
+		// ])
+		// 	.then(results => {
+		// 		const sessions = results[0];
+		// 		const schedule = results[1];
+
+		// 		this.context.setSessionList(sessions);
+		// 		this.context.setScheduleList(schedule);
+		// 	})
+
+		SessionApiService.getSessions()
+			.then(this.context.setSessionList)
 			.catch(this.context.setError);
 	}
 
@@ -55,16 +60,11 @@ export default class SessionListPage extends Component {
 	render() {
 		const { error } = this.context;
 
-		console.log('loginUserId in context = ', this.context.loginUserId);
 		console.log('sessionList in context = ', this.context.sessionList);
 		console.log('scheduleList in context = ', this.context.scheduleList);
 
 		return (
 			<section>
-				{/* TBD debug loginUserId */}
-				{this.context.loginUserId && (
-					<p>loginUserId: {this.context.loginUserId}</p>
-				)}
 				{error ? (
 					<p className="error">
 						There was an error, try again.
