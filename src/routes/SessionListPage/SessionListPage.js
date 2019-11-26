@@ -13,27 +13,23 @@ export default class SessionListPage extends Component {
 
 		// get Schecule on login not on SessionsList
 
-		Promise.all([
-			// only gets Schedule if logged in
-			// sessionList is combined with loginUser's schedule to have loginUserId on applicable session records (to show stars)
-			// scheduleList is combined with sessions to show all session info
-			SessionApiService.getSessions(),
-			SessionApiService.getSchedule()
-		]).then(results => {
-			const sessions = results[0];
-			const schedule = results[1];
+		// Promise.all([
+		// 	// only gets Schedule if logged in
+		// 	// sessionList is combined with loginUser's schedule to have loginUserId on applicable session records (to show stars)
+		// 	// scheduleList is combined with sessions to show all session info
+		// 	SessionApiService.getSessions(),
+		// 	SessionApiService.getSchedule()
+		// ]).then(results => {
+		// 	const sessions = results[0];
+		// 	const schedule = results[1];
 
-			this.context.setSessionList(sessions);
-			this.context.setScheduleList(schedule);
-		});
+		// 	this.context.setSessionList(sessions);
+		// 	this.context.setScheduleList(schedule);
+		// });
 
-		// SessionApiService.getSessions()
-		// 	.then(this.context.setSessionList)
-		// 	.catch(this.context.setError);
-
-		// SessionApiService.getSchedule()
-		// 	.then(this.context.setScheduleList)
-		// 	.catch(this.context.setError);
+		SessionApiService.getSessions()
+			.then(this.context.setSessionList)
+			.catch(this.context.setError);
 	}
 
 	renderSessions() {
@@ -64,6 +60,7 @@ export default class SessionListPage extends Component {
 		const { error } = this.context;
 
 		console.log('sessionList in context = ', this.context.sessionList);
+
 		console.log('scheduleList in context = ', this.context.scheduleList);
 
 		return (

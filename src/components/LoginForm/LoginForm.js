@@ -46,6 +46,7 @@ export default class LoginForm extends Component {
 			})
 			.then(() => {
 				// get schedule immediately upon login
+				// TBD - schedule is NOT being stored in context????  If reload page its gone!!!
 				SessionApiService.getSchedule()
 					.then(this.context.setScheduleList)
 					.catch(this.context.setError);
@@ -58,6 +59,7 @@ export default class LoginForm extends Component {
 
 	render() {
 		const { error } = this.state;
+
 		return (
 			<form onSubmit={this.handleSubmitJwtAuth}>
 				<div role="alert">{error && <p className="error">{error}</p>}</div>
