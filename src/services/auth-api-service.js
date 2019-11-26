@@ -1,10 +1,6 @@
-import { useContext } from 'react';
 import config from '../config';
 import TokenService from './token-service';
 import IdleService from './idle-service';
-
-import AppContext from '../contexts/AppContext';
-import SessionApiService from './session-api-service';
 
 const AuthApiService = {
 	postUser(user) {
@@ -44,21 +40,6 @@ const AuthApiService = {
 					AuthApiService.postRefreshToken();
 				});
 
-				// GET SCHEDULE HERE instead of on sessionsListPage
-				// TBD STOPS Login from continuing onto sessions page!!! And doesn't get the schedule!
-
-				console.log('auth-api-service - GOT HERE 1');
-
-				// use context inside functional component
-
-				// IF I TURN THIS ON IT STOPS LOGIN FROM CONTINUING!!! and does NOT load the schedule!!!
-				const context = useContext(AppContext);
-
-				SessionApiService.getSchedule()
-					.then(context.setScheduleList)
-					.catch(context.setError);
-
-				console.log('auth-api-service - GOT HERE 2');
 				return res;
 			});
 	},

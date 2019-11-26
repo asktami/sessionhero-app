@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
+import AppContext from '../../contexts/AppContext';
+
 import TokenService from '../../services/token-service';
 import AuthApiService from '../../services/auth-api-service';
+import SessionApiService from '../../services/session-api-service';
 
 export default class LoginForm extends Component {
+	static contextType = AppContext;
+
 	static defaultProps = {
 		onLoginSuccess: () => {}
 	};
@@ -12,10 +17,6 @@ export default class LoginForm extends Component {
 	handleSubmitBasicAuth = ev => {
 		ev.preventDefault();
 		const { username, password } = ev.target;
-
-		// console.log('login form submitted');
-		// console.log('username: ', username.value);
-		// console.log('password: ', password.value);
 
 		// create the login auth token and save it in localStorage
 		TokenService.saveAuthToken(
@@ -43,6 +44,13 @@ export default class LoginForm extends Component {
 				TokenService.saveAuthToken(res.authToken);
 				this.props.onLoginSuccess();
 			})
+			.then(() => {
+				// get schedule immediately upon login
+				SessionApiService.getSchedule()
+					.then(this.context.setScheduleList)
+					.catch(this.context.setError);
+			})
+
 			.catch(res => {
 				this.setState({ error: res.error });
 			});
