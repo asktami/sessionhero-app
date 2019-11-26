@@ -30,6 +30,11 @@ export default class SessionListPage extends Component {
 		SessionApiService.getSessions()
 			.then(this.context.setSessionList)
 			.catch(this.context.setError);
+
+		// SessionApiService.getSessions()
+		// .then(this.context.setSessionList)
+		// .catch(this.context.setError)
+		// .then(schedulelist => this.context.setScheduleList(schedulelist)).catch(this.context.setError)
 	}
 
 	renderSessions() {
