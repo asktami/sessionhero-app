@@ -17,13 +17,34 @@ import RegistrationPage from '../../routes/RegistrationPage/RegistrationPage';
 import NotFoundPage from '../../routes/NotFoundPage/NotFoundPage';
 import './App.css';
 
+import TokenService from '../../services/token-service';
+import AppContext from '../../contexts/AppContext';
+
 class App extends Component {
+	static contextType = AppContext;
+
 	state = { hasError: false };
 
 	static getDerivedStateFromError(error) {
 		console.error(error);
 		return { hasError: true };
 	}
+
+	componentDidMount() {
+		this.updateLoginUserId();
+	}
+
+	updateLoginUserId = () => {
+		let token = TokenService.getAuthToken();
+		if (token) {
+			let parsed = TokenService.parseJwt(token);
+			let loginUserId = parsed.user_id;
+			console.log('--------- App result = ', token);
+			console.log('--------- App parseJwt = ', parsed);
+			console.log('--------- App loginUserId = ', loginUserId);
+			this.context.setLoginUserId(loginUserId);
+		}
+	};
 
 	render() {
 		return (
