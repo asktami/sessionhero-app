@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import AppContext from '../../contexts/AppContext';
 import TokenService from '../../services/token-service';
 import { Pipe } from '../../components/Utils/Utils';
 import '../../index.css';
@@ -8,8 +9,12 @@ import '../../index.css';
 import { withRouter } from 'react-router';
 
 class Nav extends Component {
+	static contextType = AppContext;
+
 	handleLogoutClick = () => {
 		TokenService.clearAuthToken();
+		this.context.setLoginUserId('');
+		// QUESTION - should this be part of the token function?
 	};
 
 	renderLogoutLink() {
