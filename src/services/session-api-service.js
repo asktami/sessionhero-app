@@ -44,14 +44,17 @@ const SessionApiService = {
 		// this will ALWAYS send the loginUserId BECAUSE of the authoriztion header, which has the AuthToken, which is set at time of 1st login with the user record id
 		// see auth-api-service
 
-		return fetch(`${config.API_ENDPOINT}/schedule`, {
-			headers: {
-				'content-type': 'application/json',
-				authorization: `bearer ${TokenService.getAuthToken()}`
-			}
-		}).then(res =>
-			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
-		);
+		// only getSchedule IF logged in
+		if (TokenService.getAuthToken()) {
+			return fetch(`${config.API_ENDPOINT}/schedule`, {
+				headers: {
+					'content-type': 'application/json',
+					authorization: `bearer ${TokenService.getAuthToken()}`
+				}
+			}).then(res =>
+				!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+			);
+		}
 	},
 	getSession(session_id) {
 		// protected endpoint
@@ -78,9 +81,9 @@ const SessionApiService = {
 			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
 		);
 	},
-	getComment(commentId) {
+	getComment(comment_id) {
 		// protected endpoint
-		return fetch(`${config.API_ENDPOINT}/comments/${commentId}`, {
+		return fetch(`${config.API_ENDPOINT}/comments/${comment_id}`, {
 			headers: {
 				'content-type': 'application/json',
 				authorization: `bearer ${TokenService.getAuthToken()}`
@@ -90,33 +93,9 @@ const SessionApiService = {
 		);
 	},
 
-	// fetch(config.API_ENDPOINT + `/comments/${commentId}`, {
-	// 	method: 'GET',
-	// 	headers: {
-	// 		'content-type': 'application/json',
-	// 		authorization: `Bearer ${config.API_KEY}`
-	// 	}
-	// })
-	// 	.then(res => {
-	// 		if (!res.ok) return res.json().then(error => Promise.reject(error));
-
-	// 		return res.json();
-	// 	})
-	// 	.then(responseData => {
-	// 		this.setState({
-	// 			id: responseData.id,
-	// 			text: responseData.text,
-	// 			rating: responseData.rating,
-	// 			session_id: responseData.session_id
-	// 		});
-	// 	})
-	// 	.catch(error => {
-	// 		this.setState({ apiError: error });
-	// 	});
-
-	deleteComment(commentId) {
+	deleteComment(comment_id) {
 		// protected endpoint
-		return fetch(`${config.API_ENDPOINT}/comments/${commentId}`, {
+		return fetch(`${config.API_ENDPOINT}/comments/${comment_id}`, {
 			method: 'DELETE',
 			headers: {
 				'content-type': 'application/json',
@@ -141,7 +120,7 @@ const SessionApiService = {
 			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
 		);
 	},
-	addComment(session_id, text, rating) {
+	postComment(session_id, text, rating) {
 		// protected endpoint
 		return fetch(`${config.API_ENDPOINT}/comments`, {
 			method: 'POST',
@@ -150,35 +129,34 @@ const SessionApiService = {
 				authorization: `bearer ${TokenService.getAuthToken()}`
 			},
 			body: JSON.stringify({
-				session_id: session_id,
-				rating,
-				text
+				session_id,
+				text,
+				rating
 			})
 		}).then(res =>
 			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
 		);
 	},
 
-	addScheduleItem(session_id, user_id) {
+	addScheduleItem(session_id) {
 		// protected endpoint
-		return fetch(`${config.API_ENDPOINT}/schedule`, {
+		return fetch(`${config.API_ENDPOINT}/schedule/${session_id}`, {
 			method: 'POST',
 			headers: {
 				'content-type': 'application/json',
 				authorization: `bearer ${TokenService.getAuthToken()}`
 			},
 			body: JSON.stringify({
-				session_id: session_id,
-				user_id: user_id
+				session_id
 			})
 		}).then(res =>
 			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
 		);
 	},
 
-	deleteScheduleItem(schedule_id) {
+	deleteScheduleItem(session_id) {
 		// protected endpoint
-		return fetch(`${config.API_ENDPOINT}/schedule/${schedule_id}`, {
+		return fetch(`${config.API_ENDPOINT}/schedule/${session_id}`, {
 			method: 'DELETE',
 			headers: {
 				'content-type': 'application/json',

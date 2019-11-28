@@ -22,7 +22,9 @@ const AppContext = React.createContext({
 	clearSession: () => {},
 	addComment: () => {},
 	editComment: () => {},
-	deleteComment: () => {}
+	deleteComment: () => {},
+	addScheduleItem: () => {},
+	removeScheduleItem: () => {}
 });
 export default AppContext;
 
@@ -141,6 +143,17 @@ export class AppProvider extends Component {
 		this.setComments(newComments);
 	};
 
+	addScheduleItem = item => {
+		this.setScheduleList([...this.state.scheduleList, item]);
+	};
+
+	removeScheduleItem = scheduleId => {
+		const newScheduleList = this.state.scheduleList.filter(
+			schedule => schedule.id !== scheduleId
+		);
+		this.setScheduleList(newScheduleList);
+	};
+
 	render() {
 		const value = {
 			setLoginUserId: this.setLoginUserId,
@@ -168,7 +181,9 @@ export class AppProvider extends Component {
 			clearSession: this.clearSession,
 			addComment: this.addComment,
 			editComment: this.editComment,
-			deleteComment: this.deleteComment
+			deleteComment: this.deleteComment,
+			addScheduleItem: this.addScheduleItem,
+			removeScheduleItem: this.removeScheduleItem
 		};
 		return (
 			<AppContext.Provider value={value}>
