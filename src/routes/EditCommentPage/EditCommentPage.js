@@ -1,5 +1,4 @@
 import React from 'react';
-import config from '../../config';
 import AppContext from '../../contexts/AppContext';
 import SessionApiService from '../../services/session-api-service';
 import ValidationError from '../../ValidationError';
@@ -7,8 +6,15 @@ import ValidationError from '../../ValidationError';
 class EditComment extends React.Component {
 	static contextType = AppContext;
 
+	static defaultProps = {
+		match: { params: {} },
+		location: {},
+		history: {
+			push: () => {}
+		}
+	};
+
 	state = {
-		apiError: null,
 		formValid: true,
 		errorCount: null,
 		id: '',
@@ -21,38 +27,14 @@ class EditComment extends React.Component {
 		}
 	};
 
-	// to see EditComment apiError in ui:
-	/*
-	state = {
-		apiError: 'editComment apiError errorMessage',
-		...
-	*/
-
-	// TBD HOW TO USE SessionApiService.getComment here???
-
-	// componentDidMount() {
-	// 	const { commentId } = this.props.match.params;
-
-	// 	this.context.clearError();
-	// 	SessionApiService.getComment(commentId)
-	// 		.then(this.context.setComment)
-	// 		.catch(this.context.setError);
-	// }
-
 	componentDidMount() {
 		const { commentId } = this.props.match.params;
-		fetch(config.API_ENDPOINT + `/comments/${commentId}`, {
-			method: 'GET',
-			headers: {
-				'content-type': 'application/json',
-				authorization: `Bearer ${config.API_KEY}`
-			}
-		})
-			.then(res => {
-				if (!res.ok) return res.json().then(error => Promise.reject(error));
+		this.context.clearError();
 
-				return res.json();
-			})
+		console.log('EditCommentPage commentId = ', commentId);
+
+		SessionApiService.getComment(commentId)
+			.then(this.context.setComment)
 			.then(responseData => {
 				this.setState({
 					id: responseData.id,
@@ -61,9 +43,7 @@ class EditComment extends React.Component {
 					session_id: responseData.session_id
 				});
 			})
-			.catch(error => {
-				this.setState({ apiError: error });
-			});
+			.catch(this.context.setError);
 	}
 
 	updateErrorCount = () => {
@@ -114,7 +94,8 @@ class EditComment extends React.Component {
 	};
 
 	handleClickCancel = () => {
-		this.props.history.push(`/sessions/${this.state.session_id}`);
+		// this.props.history.push(`/sessions/${this.state.session_id}`);
+		this.props.history.goBack();
 	};
 
 	resetFields = newFields => {
@@ -142,13 +123,10 @@ class EditComment extends React.Component {
 			modified: new Date()
 		};
 
-		this.setState({ apiError: null });
-
 		SessionApiService.editComment(updatedComment)
 			.then(this.context.editComment)
 			.then(() => {
 				this.resetFields(updatedComment);
-				this.context.editComment(updatedComment);
 				this.props.history.goBack();
 			})
 			.catch(this.context.setError);
@@ -156,10 +134,9 @@ class EditComment extends React.Component {
 
 	render() {
 		const { errors, text, rating } = this.state;
-		if (this.state.apiError) {
-			return <p className="error">{this.state.apiErrors}</p>;
-		}
+		console.log(('session ', JSON.stringify(this.state.session)));
 
+		
 		return (
 			<form onSubmit={this.handleSubmit}>
 				<fieldset>
