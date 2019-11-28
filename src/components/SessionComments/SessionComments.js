@@ -35,10 +35,12 @@ export default class SessionContents extends Component {
 										<br />
 										user_id: {comment.user_id}
 										<br />
+										user.id: {comment.user.id}
+										<br />
 										fullname: {comment.user.fullname}
 									</span>
 								</div>
-								{comment.user_id === loginUserId ? (
+								{comment.user.id === loginUserId ? (
 									<div className="flex-row comment-btns">
 										<div>
 											<Link
