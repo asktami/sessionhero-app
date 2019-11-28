@@ -60,8 +60,16 @@ export default class SessionListItem extends Component {
 
 						<div className="description">
 							<span>
-								<Link to={`/sessions/${session.id}`}>
+								<Link
+									to={`/sessions/${
+										session.session_id ? session.session_id : session.id
+									}`}
+								>
 									<span className="simple title">{session.name}</span>
+									<br />
+									session.session_id = {session.session_id}
+									<br />
+									session.id = {session.id}
 								</Link>
 							</span>
 							<br />
