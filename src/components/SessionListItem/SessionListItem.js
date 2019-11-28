@@ -60,17 +60,13 @@ export default class SessionListItem extends Component {
 
 						<div className="description">
 							<span>
-								<Link
-									to={`/sessions/${
-										session.session_id ? session.session_id : session.id
-									}`}
-								>
+								<Link to={`/sessions/${session.session_id}`}>
 									<span className="simple title">{session.name}</span>
-									<br />
-									session.session_id = {session.session_id}
-									<br />
-									session.id = {session.id}
 								</Link>
+								<br />
+								session.session_id = {session.session_id}
+								<br />
+								session.user_id = {session.user_id}
 							</span>
 							<br />
 							<span className="location">{session.location}</span>
@@ -91,9 +87,9 @@ export default class SessionListItem extends Component {
 								className="btn-expand-item"
 								aria-expanded="false"
 								aria-label="show-session-details-button"
-								onClick={() => setToggleId(session.id)}
+								onClick={() => setToggleId(session.session_id)}
 							>
-								{toggleId === session.id ? (
+								{toggleId === session.session_id ? (
 									<FontAwesomeIcon icon="chevron-up" size="2x" />
 								) : (
 									<FontAwesomeIcon icon="chevron-down" size="2x" />
@@ -101,16 +97,16 @@ export default class SessionListItem extends Component {
 							</button>
 						) : null}
 
-						{/* need to be loggedIn AND session.user_id === loggedIn user_id */}
-
 						{loginUserId && session.user_id === loginUserId ? (
 							<button
 								className="btn-remove-from-schedule"
 								aria-label="add-session-to-schedule-button"
-								onClick={() => this.removeFromSchedule(session.id)}
+								onClick={() =>
+									this.props.removeFromSchedule(session.session_id)
+								}
 							>
-								FILLED user_id = {session.user_id}, has token ={' '}
-								{TokenService.hasAuthToken()} <br />
+								FILLED
+								<br />
 								<FontAwesomeIcon icon={['fas', 'star']} size="2x" />
 							</button>
 						) : null}
@@ -119,11 +115,8 @@ export default class SessionListItem extends Component {
 							<button
 								className="btn-add-to-schedule"
 								aria-label="add-session-to-schedule-button"
-								onClick={() => this.addToSchedule(session.id)}
+								onClick={() => this.props.addToSchedule(session.session_id)}
 							>
-								user_id = {session.user_id}, has token ={' '}
-								{TokenService.hasAuthToken()} <br />
-								<br />
 								<FontAwesomeIcon icon={['far', 'star']} size="2x" />
 							</button>
 						) : null}
@@ -134,7 +127,7 @@ export default class SessionListItem extends Component {
 					className={
 						'flex-footer-row toggle-content ' +
 						(expandAll ||
-						toggleId === session.id ||
+						toggleId === session.session_id ||
 						pathname.includes('/sessions/')
 							? 'is-visible'
 							: null)

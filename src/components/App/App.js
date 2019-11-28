@@ -69,7 +69,7 @@ class App extends Component {
 							component={SessionPage}
 						/>
 
-						<PrivateRoute path={'/schedule'} component={ScheduleListPage} />
+						<PrivateRoute path={'/schedule'} component={SessionListPage} />
 
 						<PrivateRoute
 							path={'/comments/:comment_id'}
