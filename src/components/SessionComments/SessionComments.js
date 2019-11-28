@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
 import AppContext from '../../contexts/AppContext';
+import SessionApiService from '../../services/session-api-service';
 import { Link } from 'react-router-dom';
 import { SessionStarRating } from '../../components/SessionStarRating/SessionStarRating';
 
 export default class SessionContents extends Component {
 	static contextType = AppContext;
 
+	handleClickDeleteComment = comment_id => {
+		SessionApiService.deleteComment(comment_id)
+			.then(() => this.context.deleteComment(comment_id))
+			.catch(this.context.setError);
+	};
+
 	render() {
-		const { loginUserId, session, comments, deleteComment } = this.context;
+		const { loginUserId, session, comments } = this.context;
 
 		return (
 			<ul className="comment-list">
@@ -24,11 +31,9 @@ export default class SessionContents extends Component {
 									<span className="comment-user sponsor">
 										{JSON.stringify(comment)}
 										<br />
-										username: {comment.user.username}
+										loginUserId: {loginUserId}
 										<br />
 										user_id: {comment.user_id}
-										<br />
-										loginUserId: {loginUserId}
 										<br />
 										fullname: {comment.user.fullname}
 									</span>
@@ -45,7 +50,9 @@ export default class SessionContents extends Component {
 										<div>
 											<button
 												className="btn-delete-comment"
-												onClick={() => deleteComment(comment.id)}
+												onClick={() =>
+													this.handleClickDeleteComment(comment.id)
+												}
 											>
 												Delete
 											</button>
