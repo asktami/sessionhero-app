@@ -28,12 +28,13 @@ class EditComment extends React.Component {
 	};
 
 	componentDidMount() {
-		const { commentId } = this.props.match.params;
+		// this parameter name is defined in App.js private route
+		const { comment_id } = this.props.match.params;
 		this.context.clearError();
 
-		console.log('EditCommentPage commentId = ', commentId);
+		console.log('EditCommentPage commentId = ', comment_id);
 
-		SessionApiService.getComment(commentId)
+		SessionApiService.getComment(comment_id)
 			.then(this.context.setComment)
 			.then(responseData => {
 				this.setState({
@@ -53,6 +54,8 @@ class EditComment extends React.Component {
 		Object.values(errors).forEach(val => {
 			if (val.length > 0) {
 				count++;
+
+				console.log('val = ', val);
 			}
 		});
 
@@ -75,7 +78,11 @@ class EditComment extends React.Component {
 		if (name === 'rating') {
 			if (value.length === 0) {
 				err = 'You must enter a rating';
-			} else if (!Number.isInteger(value) || value < 1 || value > 5) {
+			} else if (
+				!Number.isInteger(parseInt(value)) ||
+				parseInt(value) < 1 ||
+				parseInt(value) > 5
+			) {
 				err = 'The rating must be a number between 1 and 5';
 			}
 		}
@@ -114,17 +121,31 @@ class EditComment extends React.Component {
 		if (this.state.errorCount > 0) return;
 
 		// get the form fields to be updated
-		const { commentId } = this.props.match.params;
+		const { comment_id } = this.props.match.params;
+
+		console.log('inside handleSubmit comment_id = ', comment_id);
+
+		console.log('inside handleSubmit this.state.text = ', this.state.text);
+
+		console.log('inside handleSubmit this.state.rating = ', this.state.rating);
 
 		const updatedComment = {
-			id: commentId,
+			id: comment_id,
 			text: this.state.text,
-			rating: this.state.rating,
+			rating: parseInt(this.state.rating),
 			modified: new Date()
 		};
 
+		// SessionApiService.editComment(updatedComment)
+		// 	.then(this.context.editComment)
+		// 	.then(() => {
+		// 		this.resetFields(updatedComment);
+		// 		this.props.history.goBack();
+		// 	})
+		// 	.catch(this.context.setError);
+
 		SessionApiService.editComment(updatedComment)
-			.then(this.context.editComment)
+			.then(() => this.context.editComment(updatedComment))
 			.then(() => {
 				this.resetFields(updatedComment);
 				this.props.history.goBack();
@@ -136,7 +157,6 @@ class EditComment extends React.Component {
 		const { errors, text, rating } = this.state;
 		console.log(('session ', JSON.stringify(this.state.session)));
 
-		
 		return (
 			<form onSubmit={this.handleSubmit}>
 				<fieldset>
@@ -164,6 +184,7 @@ class EditComment extends React.Component {
 						aria-label="Rating"
 						required
 						aria-required="true"
+						aria-describedby="ratingError"
 						aria-invalid="true"
 						value={rating}
 						onChange={this.handleChange}
@@ -175,18 +196,21 @@ class EditComment extends React.Component {
 							</option>
 						))}
 					</select>
-					<br />
-					<br />
-					<button className="btn-cancel" onClick={this.handleClickCancel}>
-						Cancel
-					</button>{' '}
-					<button
-						className="btn-save-comment"
-						disabled={this.state.formValid === false}
-						type="submit"
-					>
-						Save
-					</button>
+					{errors.rating.length > 0 && (
+						<ValidationError id={'ratingError'} message={errors.rating} />
+					)}
+					<p>
+						<button className="btn-cancel" onClick={this.handleClickCancel}>
+							Cancel
+						</button>{' '}
+						<button
+							className="btn-save-comment"
+							disabled={this.state.formValid === false}
+							type="submit"
+						>
+							Save
+						</button>
+					</p>
 				</fieldset>
 
 				{this.state.errorCount !== null ? (
