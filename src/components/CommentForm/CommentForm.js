@@ -13,7 +13,7 @@ export default class CommentForm extends Component {
 		text: '',
 		errors: {
 			text: '',
-			rating: '',
+			rating: ''
 		}
 	};
 
@@ -43,14 +43,6 @@ export default class CommentForm extends Component {
 			}
 		}
 
-		if (name === 'rating') {
-			if (value.length === 0) {
-				err = 'You must enter a rating';
-			} else if (!Number.isInteger(value) || value < 1 || value > 5) {
-				err = 'The rating must be a number between 1 and 5';
-			}
-		}
-
 		const { errors } = { ...this.state };
 		errors[name] = err;
 		this.setState({ errors });
@@ -74,7 +66,7 @@ export default class CommentForm extends Component {
 		const { session, addComment, setError } = this.context;
 		const { text, rating } = e.target;
 
-		SessionApiService.addComment(session.id, text.value, Number(rating.value))
+		SessionApiService.postComment(session.id, text.value, Number(rating.value))
 			.then(addComment)
 			.then(() => {
 				text.value = '';
@@ -118,24 +110,22 @@ export default class CommentForm extends Component {
 							name="rating"
 							id="rating"
 							aria-required="true"
-								aria-describedby="ratingError"
-								aria-invalid="true"
-								onChange={this.handleChange}
+							aria-invalid="true"
+							onChange={this.handleChange}
 						>
-							<option value="">Rate this session</option>
-							<option value="1">1 Star</option>
-							<option value="2">2 Stars</option>
-							<option value="3">3 Stars</option>
-							<option value="4">4 Stars</option>
-							<option value="5">5 Stars</option>
+							<option value="">Rate this Session</option>
+						{[1, 2, 3, 4, 5].map(rating => (
+							<option key={rating} value={rating}>
+								{rating} Stars
+							</option>
+
 						</select>
-						{errors.text.length > 0 && (
-								<ValidationError message={errors.rating} id={'ratingError'} />
-							)}
-							<br />
 						<br />
-						<button className="btn-save-comment"
-						disabled={this.state.formValid === false}>
+						<br />
+						<button
+							className="btn-save-comment"
+							disabled={this.state.formValid === false}
+						>
 							Save
 						</button>
 					</fieldset>
