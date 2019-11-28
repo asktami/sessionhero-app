@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import AppContext from '../../contexts/AppContext';
+
+import SessionApiService from '../../services/session-api-service';
 import SessionListItem from '../../components/SessionListItem/SessionListItem';
 
 import './ScheduleListPage.css';
@@ -7,8 +9,17 @@ import './ScheduleListPage.css';
 export default class ScheduleListPage extends Component {
 	static contextType = AppContext;
 
+	static defaultProps = {
+		location: { match: { params: {} } }
+	};
+
 	componentDidMount() {
+		this.context.clearError();
 		this.context.clearFilters();
+
+		SessionApiService.getSchedule()
+			.then(this.context.setScheduleList)
+			.catch(this.context.setError);
 	}
 
 	renderSchedule() {
@@ -37,6 +48,8 @@ export default class ScheduleListPage extends Component {
 
 	render() {
 		const { error, scheduleList } = this.context;
+
+		console.log('SCHEDULE LIST PAGE location = ', this.props.location);
 		return (
 			<section>
 				{error ? (

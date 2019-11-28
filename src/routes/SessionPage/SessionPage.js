@@ -8,11 +8,11 @@ import CommentForm from '../../components/CommentForm/CommentForm';
 import './SessionPage.css';
 
 export default class SessionPage extends Component {
+	static contextType = AppContext;
+
 	static defaultProps = {
 		match: { params: {} }
 	};
-
-	static contextType = AppContext;
 
 	componentDidMount() {
 		const { session_id } = this.props.match.params;

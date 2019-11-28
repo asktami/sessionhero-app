@@ -1,17 +1,24 @@
 import React, { Component } from 'react';
 import AppContext from '../../contexts/AppContext';
+
 import SessionApiService from '../../services/session-api-service';
 import SessionListItem from '../../components/SessionListItem/SessionListItem';
+
 import './SessionListPage.css';
 
 export default class SessionListPage extends Component {
 	static contextType = AppContext;
 
+	static defaultProps = {
+		location: { match: { params: {} } }
+	};
+
 	componentDidMount() {
 		this.context.clearError();
 		this.context.clearFilters();
 
-		// get Schecule on login not on SessionsList
+		// TBD QUESTION -----------------------------
+		// get Schedule on login not on SessionsList ???
 
 		// Promise.all([
 		// 	// only gets Schedule if logged in
@@ -47,7 +54,6 @@ export default class SessionListPage extends Component {
 				this.context.setScheduleList(schedule);
 				this.context.setSessionList(sessions);
 
-				// in postgres use joins instead
 				this.updateSessionList();
 			})
 			.catch(this.context.setError);
@@ -55,22 +61,61 @@ export default class SessionListPage extends Component {
 
 	// TBD update sessionList:
 	// combine sessionList and scheduleList so have loginUserId in session record
-	// in postgres use joins instead
+	// COULD NOT - in postgres use joins instead
+
 	updateSessionList() {
 		const { sessionList = [], scheduleList = [] } = this.context;
 
-		// automatically updates sessionList in context
+		// automatically update sessionList in context
+		// add schedule user id to applicable session records
+		// simulating a sessions + schedule left table join
 		sessionList.forEach(session => {
 			scheduleList.forEach(schedule => {
 				if (schedule.session_id === session.id) {
 					session.user_id = schedule.user_id;
+				} else {
+					session.user_id = '';
 				}
 			});
 		});
 	}
 
+	// TBD -----------------------------------
+	// SessionListPage = add to schedule AND delete from schedule
+	// ScheduleListPage = delete from schedule only
+
+	// NEED loginUserId when add session to schedule in context!!!! so updateSessionList can have loginUserId
+
+	addToSchedule = session_id => {
+		console.log('---------- add to schedule');
+
+		SessionApiService.addScheduleItem(session_id)
+			.then(
+				this.context.addScheduleItem({
+					session_id: session_id,
+					user_id: this.state.loginUserId
+				})
+			)
+			.then(this.updateSessionList())
+			.catch(this.context.setError);
+	};
+
+	removeFromSchedule = schedule_id => {
+		console.log('---------- remove from schedule');
+
+		// remove session from schedule
+		// AND clear user_id on that session record in sessionList
+
+		SessionApiService.deleteScheduleItem(schedule_id)
+			.then(this.context.removeScheduleItem)
+			.then(this.updateSessionList())
+			.catch(this.context.setError);
+	};
+
 	renderSessions() {
 		const { sessionList = [] } = this.context;
+
+		console.log('SESSION LIST PAGE location = ', this.props.location);
 
 		// apply search filters: filterDay and filterTrack
 		return sessionList

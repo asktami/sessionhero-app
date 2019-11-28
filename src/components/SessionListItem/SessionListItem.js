@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import AppContext from '../../contexts/AppContext';
 
 import TokenService from '../../services/token-service';
-import SessionApiService from '../../services/session-api-service';
 
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -17,106 +16,6 @@ import './SessionListItem.css';
 
 export default class SessionListItem extends Component {
 	static contextType = AppContext;
-
-	// ALWAYS use loggedIn user_id
-	addToSchedule = (session_id, user_id = 1) => {
-		console.log('---------- add to schedule');
-
-		// FAKE IT WITH STATE
-		//  session added to schedule
-		// find that session_id in sessionList
-		// create an array that is just that record from sessionList
-		// add that array to the existing scheduleList
-
-		// this.context.sessionList.forEach(session => {
-		// 	if (session.id === session_id) {
-		// 		session.user_id = 1;
-		// 	}
-		// });
-
-		// let newScheduleList = this.context.sessionList.filter(
-		// 	session => session.user_id === user_id
-		// );
-
-		// this.context.setScheduleList(newScheduleList);
-
-		// console.log('after ADD new scheduleList = ', this.context.scheduleList);
-
-		// FOR REAL DB ONLY
-		Promise.all([
-			SessionApiService.addScheduleItem(session_id, user_id),
-			SessionApiService.getSchedule()
-		])
-			.then(results => {
-				const schedule = results[1];
-
-				this.context.setScheduleList(schedule);
-
-				// in postgres use joins instead
-				this.updateSessionList();
-			})
-			.catch(this.context.setError);
-	};
-
-	removeFromSchedule = session_id => {
-		console.log('---------- remove from schedule');
-
-		// FAKE IT WITH STATE
-		// set removed sessionList user_id to blank
-		// remove session from schedule  = create new scheduleList from sessionList
-
-		this.context.sessionList.forEach(session => {
-			if (session.id === session_id) {
-				session.user_id = '';
-			}
-		});
-
-		let newScheduleList = this.context.scheduleList.filter(
-			session => session.id !== session_id
-		);
-
-		this.context.setScheduleList(newScheduleList);
-
-		console.log('after REMOVE new scheduleList = ', this.context.scheduleList);
-
-		// FOR REAL DB ONLY
-		// Promise.all([
-		// 	SessionApiService.deleteScheduleItem(schedule_id),
-		// 	SessionApiService.getSchedule()
-		// ])
-		// 	.then(results => {
-		// 		const schedule = results[1];
-
-		// 		this.context.setScheduleList(schedule);
-
-		// 		// in postgres use joins instead
-		// 		this.updateSessionList();
-		// 	})
-		// 	.catch(this.context.setError);
-	};
-
-	updateSessionList() {
-		const { sessionList = [], scheduleList = [] } = this.context;
-
-		// FAKE IT
-		// automatically updates sessionList in context
-		sessionList.forEach(session => {
-			scheduleList.forEach(schedule => {
-				if (schedule.session_id === session.id) {
-					session.user_id = schedule.user_id;
-				}
-			});
-		});
-
-		console.log('sessionListItem update sessionList = ', sessionList);
-
-		// to update scheduleList in context
-		let newScheduleList = sessionList.filter(session => session.user_id === 1);
-
-		console.log('sessionListItem update newScheduleList = ', newScheduleList);
-
-		this.context.setScheduleList(newScheduleList);
-	}
 
 	render() {
 		const { loginUserId, setToggleId, toggleId, expandAll } = this.context;
