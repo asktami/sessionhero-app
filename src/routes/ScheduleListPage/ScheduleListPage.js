@@ -57,7 +57,7 @@ export default class ScheduleListPage extends Component {
 						There was an error, try again <br />
 						{error}
 					</p>
-				) : scheduleList.length === 0 ? (
+				) : !scheduleList || scheduleList.length === 0 ? (
 					<p>You haven't added any sessions to your schedule yet.</p>
 				) : (
 					<ul className="sessions-list">{this.renderSchedule()}</ul>
