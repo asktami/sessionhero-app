@@ -101,8 +101,12 @@ const SessionApiService = {
 				'content-type': 'application/json',
 				authorization: `bearer ${TokenService.getAuthToken()}`
 			}
-		}).then(res =>
-			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+		}).then(
+			res => (!res.ok ? res.json().then(e => Promise.reject(e)) : null)
+
+			// WAS - SyntaxError: Unexpected end of JSON input
+			// .then(res =>
+			// 	!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
 		);
 	},
 	editComment(comment) {
@@ -113,11 +117,13 @@ const SessionApiService = {
 				'content-type': 'application/json',
 				authorization: `bearer ${TokenService.getAuthToken()}`
 			},
-			body: JSON.stringify({
-				comment
-			})
-		}).then(res =>
-			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+			body: JSON.stringify(comment)
+		}).then(
+			res => (!res.ok ? res.json().then(e => Promise.reject(e)) : null)
+
+			// WAS - SyntaxError: Unexpected end of JSON input
+			// .then(res =>
+			// 	!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
 		);
 	},
 	postComment(session_id, text, rating) {
