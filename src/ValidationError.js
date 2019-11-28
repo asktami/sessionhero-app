@@ -4,7 +4,7 @@ export default function ValidationError(props) {
 	if (props.message) {
 		return (
 			<div className="error" id={props.id}>
-				{props.message}
+				<p>{props.message}</p>
 			</div>
 		);
 	}
