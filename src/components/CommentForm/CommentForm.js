@@ -12,8 +12,7 @@ export default class CommentForm extends Component {
 		errorCount: null,
 		text: '',
 		errors: {
-			text: '',
-			rating: ''
+			text: ''
 		}
 	};
 
@@ -70,7 +69,6 @@ export default class CommentForm extends Component {
 			.then(addComment)
 			.then(() => {
 				text.value = '';
-				rating.value = '';
 			})
 			.catch(setError);
 	};
@@ -113,7 +111,6 @@ export default class CommentForm extends Component {
 							aria-invalid="true"
 							onChange={this.handleChange}
 						>
-							<option value="">Rate this Session</option>
 							{[1, 2, 3, 4, 5].map(rating => (
 								<option key={rating} value={rating}>
 									{rating} Stars
