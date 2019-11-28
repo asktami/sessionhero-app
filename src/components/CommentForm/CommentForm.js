@@ -114,11 +114,11 @@ export default class CommentForm extends Component {
 							onChange={this.handleChange}
 						>
 							<option value="">Rate this Session</option>
-						{[1, 2, 3, 4, 5].map(rating => (
-							<option key={rating} value={rating}>
-								{rating} Stars
-							</option>
-
+							{[1, 2, 3, 4, 5].map(rating => (
+								<option key={rating} value={rating}>
+									{rating} Stars
+								</option>
+							))}
 						</select>
 						<br />
 						<br />
