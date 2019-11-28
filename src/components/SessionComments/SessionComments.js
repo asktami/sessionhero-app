@@ -7,7 +7,7 @@ export default class SessionContents extends Component {
 	static contextType = AppContext;
 
 	render() {
-		const { session, comments, deleteComment } = this.context;
+		const { loginUserId, session, comments, deleteComment } = this.context;
 
 		return (
 			<ul className="comment-list">
@@ -22,13 +22,18 @@ export default class SessionContents extends Component {
 									<SessionStarRating rating={comment.rating} />
 									<br />
 									<span className="comment-user sponsor">
-										{comment.user_id === 1
-											? 'LoggedIn User Created This Comment'
-											: 'OtherFirst OtherLast'}
+										{JSON.stringify(comment)}
+										<br />
+										username: {comment.user.username}
+										<br />
+										user_id: {comment.user_id}
+										<br />
+										loginUserId: {loginUserId}
+										<br />
+										fullname: {comment.user.fullname}
 									</span>
 								</div>
-								{/* TBD */}
-								{comment.user_id === 1 ? (
+								{comment.user_id === loginUserId ? (
 									<div className="flex-row comment-btns">
 										<div>
 											<Link
