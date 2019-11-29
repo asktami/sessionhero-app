@@ -155,21 +155,29 @@ const SessionApiService = {
 			body: JSON.stringify({
 				session_id
 			})
-		}).then(res =>
-			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+		}).then(
+			res => (!res.ok ? res.json().then(e => Promise.reject(e)) : null)
+
+			// WAS - SyntaxError: Unexpected end of JSON input
+			// .then(res =>
+			// 	!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
 		);
 	},
 
-	deleteScheduleItem(session_id) {
+	deleteScheduleItem(schedule_id) {
 		// protected endpoint
-		return fetch(`${config.API_ENDPOINT}/schedule/${session_id}`, {
+		return fetch(`${config.API_ENDPOINT}/schedule/${schedule_id}`, {
 			method: 'DELETE',
 			headers: {
 				'content-type': 'application/json',
 				authorization: `bearer ${TokenService.getAuthToken()}`
 			}
-		}).then(res =>
-			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+		}).then(
+			res => (!res.ok ? res.json().then(e => Promise.reject(e)) : null)
+
+			// WAS - SyntaxError: Unexpected end of JSON input
+			// .then(res =>
+			// 	!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
 		);
 	}
 };
