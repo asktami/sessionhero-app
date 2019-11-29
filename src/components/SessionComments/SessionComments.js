@@ -29,15 +29,7 @@ export default class SessionContents extends Component {
 									<SessionStarRating rating={comment.rating} />
 									<br />
 									<span className="comment-user sponsor">
-										{JSON.stringify(comment)}
-										<br />
-										loginUserId: {loginUserId}
-										<br />
-										user_id: {comment.user_id}
-										<br />
-										user.id: {comment.user.id}
-										<br />
-										fullname: {comment.user.fullname}
+										{comment.user.fullname}
 									</span>
 								</div>
 								{comment.user.id === loginUserId ? (
