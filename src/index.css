@@ -714,3 +714,9 @@ label.star:before {
 	text-align: center;
 	border: 1px solid red;
 }
+
+.text-center {
+	margin: 0 auto;
+	font-family: 'Coming Soon', cursive;
+	text-align: center;
+}
