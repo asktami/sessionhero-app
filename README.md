@@ -1,6 +1,6 @@
-# sessionhero-app
+# SessionHero-app
 
-![Noteful screenshot](https://github.com/asktami/noteful-react-client/blob/master/noteful.png 'Noteful')
+![SessionHero screenshot](https://github.com/asktami/sessionhero-app-for-postgres/blob/master/sessionhero.png 'SessionHero')
 
 [View Live](https://sessionhero-app.now.sh/)
 
