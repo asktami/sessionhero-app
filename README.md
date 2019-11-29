@@ -27,7 +27,7 @@ Attendee Conference Session Scheduler / SessionTracker / Agenda Builder
 
 - can see their schedule, i.e. list of sessions they plan on attending
 
-- they can filter their schedule by day or track
+- can filter their schedule by day or track
 
 Works with [https://github.com/asktami/sessionhero-api](https://github.com/asktami/sessionhero-api).
 
