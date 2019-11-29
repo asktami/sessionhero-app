@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import AppContext from '../../contexts/AppContext';
-
-import TokenService from '../../services/token-service';
-
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -102,10 +99,9 @@ export default class SessionListItem extends Component {
 								className="btn-remove-from-schedule"
 								aria-label="add-session-to-schedule-button"
 								onClick={() =>
-									this.props.removeFromSchedule(session.session_id)
+									this.props.removeFromSchedule(session.schedule_id)
 								}
 							>
-								FILLED
 								<br />
 								<FontAwesomeIcon icon={['fas', 'star']} size="2x" />
 							</button>
