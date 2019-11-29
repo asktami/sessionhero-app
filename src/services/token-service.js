@@ -7,7 +7,6 @@ const _TEN_SECONDS_IN_MS = 10000;
 const TokenService = {
 	saveAuthToken(token) {
 		window.localStorage.setItem(config.TOKEN_KEY, token);
-		// this.context.setLoginUserId(token.user_id);
 	},
 	getAuthToken() {
 		return window.localStorage.getItem(config.TOKEN_KEY);
@@ -15,7 +14,6 @@ const TokenService = {
 	clearAuthToken() {
 		console.info('clearing the auth token');
 		window.localStorage.removeItem(config.TOKEN_KEY);
-		// this.context.setLoginUserId('');
 	},
 	hasAuthToken() {
 		return !!TokenService.getAuthToken();
