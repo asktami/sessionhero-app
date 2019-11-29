@@ -101,9 +101,6 @@ class SearchBar extends Component {
 							<option value="business" data-filter="business">
 								Business
 							</option>
-							<option value="sponsor" data-filter="sponsor">
-								Sponsor
-							</option>
 							<option value="fba" data-filter="fba">
 								FBA
 							</option>
