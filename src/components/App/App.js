@@ -6,7 +6,6 @@ import PrivateRoute from '../Utils/PrivateRoute';
 import PublicOnlyRoute from '../Utils/PublicOnlyRoute';
 import SessionListPage from '../../routes/SessionListPage/SessionListPage';
 import SessionPage from '../../routes/SessionPage/SessionPage';
-import ScheduleListPage from '../../routes/ScheduleListPage/ScheduleListPage';
 
 import EditCommentPage from '../../routes/EditCommentPage/EditCommentPage';
 
