@@ -17,6 +17,7 @@ Attendee Conference Session Scheduler / SessionTracker / Agenda Builder
 * anyone can register and login
 
 * after logging in the user sees the session list, and:
+  ...
 
   - can click on a session to:
   - add comments and 1 to 5-star rating to a session
