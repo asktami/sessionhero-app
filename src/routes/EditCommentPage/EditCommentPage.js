@@ -101,8 +101,7 @@ class EditComment extends React.Component {
 	};
 
 	handleClickCancel = () => {
-		// this.props.history.push(`/sessions/${this.state.session_id}`);
-		this.props.history.goBack();
+		this.props.history.push(`/sessions/${this.state.session_id}`);
 	};
 
 	resetFields = newFields => {
@@ -123,26 +122,12 @@ class EditComment extends React.Component {
 		// get the form fields to be updated
 		const { comment_id } = this.props.match.params;
 
-		console.log('inside handleSubmit comment_id = ', comment_id);
-
-		console.log('inside handleSubmit this.state.text = ', this.state.text);
-
-		console.log('inside handleSubmit this.state.rating = ', this.state.rating);
-
 		const updatedComment = {
 			id: comment_id,
 			text: this.state.text,
 			rating: parseInt(this.state.rating),
 			modified: new Date()
 		};
-
-		// SessionApiService.editComment(updatedComment)
-		// 	.then(this.context.editComment)
-		// 	.then(() => {
-		// 		this.resetFields(updatedComment);
-		// 		this.props.history.goBack();
-		// 	})
-		// 	.catch(this.context.setError);
 
 		SessionApiService.editComment(updatedComment)
 			.then(() => this.context.editComment(updatedComment))
@@ -155,7 +140,6 @@ class EditComment extends React.Component {
 
 	render() {
 		const { errors, text, rating } = this.state;
-		console.log(('session ', JSON.stringify(this.state.session)));
 
 		return (
 			<form onSubmit={this.handleSubmit}>
