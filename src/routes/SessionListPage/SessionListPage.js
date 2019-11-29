@@ -50,24 +50,58 @@ export default class SessionListPage extends Component {
 	// }
 
 	addToSchedule = session_id => {
-		SessionApiService.addScheduleItem(session_id)
-			.then(
+		// SessionApiService.addScheduleItem(session_id)
+		// 	.then(
+		// 		this.context.addScheduleItem({
+		// 			session_id: session_id,
+		// 			user_id: this.context.loginUserId
+		// 		})
+		// 	)
+		// 	.then(SessionApiService.getSessions())
+		// 	.catch(this.context.setError);
+
+		Promise.all([
+			SessionApiService.addScheduleItem(session_id),
+			SessionApiService.getSessions(),
+			SessionApiService.getSchedule()
+		])
+			.then(results => {
 				this.context.addScheduleItem({
 					session_id: session_id,
 					user_id: this.context.loginUserId
-				})
-			)
-			.then(SessionApiService.getSchedule())
+				});
+
+				const sessions = results[1];
+				const schedule = results[2];
+
+				this.context.setSessionList(sessions);
+				this.context.setScheduleList(schedule);
+			})
 			.catch(this.context.setError);
 	};
 
 	removeFromSchedule = schedule_id => {
 		// remove session from schedule
 		// AND clear user_id on that session record in sessionList
+		// SessionApiService.deleteScheduleItem(schedule_id)
+		// 	.then(this.context.removeScheduleItem(schedule_id))
+		// 	.then(SessionApiService.getSessions())
+		// 	.then(SessionApiService.getSchedule())
+		// 	.catch(this.context.setError);
 
-		SessionApiService.deleteScheduleItem(schedule_id)
-			.then(this.context.removeScheduleItem(schedule_id))
-			.then(SessionApiService.getSchedule())
+		Promise.all([
+			SessionApiService.deleteScheduleItem(schedule_id),
+			SessionApiService.getSessions(),
+			SessionApiService.getSchedule()
+		])
+			.then(results => {
+				this.context.removeScheduleItem(schedule_id);
+				const sessions = results[1];
+				const schedule = results[2];
+
+				this.context.setSessionList(sessions);
+				this.context.setScheduleList(schedule);
+			})
 			.catch(this.context.setError);
 	};
 
@@ -83,8 +117,16 @@ export default class SessionListPage extends Component {
 			sessionOrScheduleList = scheduleList;
 		}
 
+		let count = sessionOrScheduleList.length;
+		if (count === 0)
+			return (
+				<div className="text-center">
+					You haven't added any sessions to your schedule yet.
+				</div>
+			);
+
 		// apply search filters: filterDay and filterTrack
-		return sessionOrScheduleList
+		result = sessionOrScheduleList
 			.filter(
 				session =>
 					session.day
@@ -104,6 +146,8 @@ export default class SessionListPage extends Component {
 					/>
 				</li>
 			));
+
+		return <ul className="sessions-list">{result}</ul>;
 	}
 
 	render() {
@@ -124,7 +168,7 @@ export default class SessionListPage extends Component {
 						{JSON.stringify(error)}
 					</p>
 				) : (
-					<ul className="sessions-list">{this.renderSessions()}</ul>
+					this.renderSessions()
 				)}
 			</section>
 		);
