@@ -9,24 +9,25 @@
 Attendee Conference Session Scheduler / SessionTracker / Agenda Builder
 
 - Fullstack App
+
 - uses the FileMaker DevCon 2019 sessions list (exported from FMDevToGo from [https://www.filemaker.com/](https://www.filemaker.com/))
 
-* anyone going to the home page will see a list of all sessions
+- anyone going to the home page will see a list of all sessions
 
-* anyone can filter the list by day or track
+- anyone can filter the list by day or track
 
-* anyone can register and login
+- anyone can register and login
 
-* after logging in the user sees the session list, and:
+- after logging in the user sees the session list, and:
 
-* can click on a session to:
+- can click on a session to:
 
   - add comments and 1 to 5-star rating to a session
   - add a session to their schedule
 
-* can see their schedule, i.e. list of sessions they plan on attending
+- can see their schedule, i.e. list of sessions they plan on attending
 
-* they can filter their schedule by day or track
+- they can filter their schedule by day or track
 
 Works with [https://github.com/asktami/sessionhero-api](https://github.com/asktami/sessionhero-api).
 
