@@ -35,6 +35,14 @@ export function convertDate(dateStr) {
 	return Intl.DateTimeFormat('en-US').format(new Date(dateStr));
 }
 
+// convert time from date_modified field with 2019-11-29T19:37:06.501Z to 2:34:35 PM
+export function convertDateTime(dateStr) {
+	return new Date(dateStr).toLocaleTimeString('en-US', {
+		timeZone: 'America/New_York',
+		hour12: true
+	});
+}
+
 // to get dayNumber
 export function getDayNumber(dateStr, locale = 'en-US') {
 	var date = new Date(dateStr);
