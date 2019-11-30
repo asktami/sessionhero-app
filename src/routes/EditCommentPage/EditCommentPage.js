@@ -32,8 +32,6 @@ class EditComment extends React.Component {
 		const { comment_id } = this.props.match.params;
 		this.context.clearError();
 
-		console.log('EditCommentPage commentId = ', comment_id);
-
 		SessionApiService.getComment(comment_id)
 			.then(this.context.setComment)
 			.then(responseData => {
@@ -54,8 +52,6 @@ class EditComment extends React.Component {
 		Object.values(errors).forEach(val => {
 			if (val.length > 0) {
 				count++;
-
-				console.log('val = ', val);
 			}
 		});
 

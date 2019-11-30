@@ -18,8 +18,6 @@ export default class SessionPage extends Component {
 		const { session_id } = this.props.match.params;
 		this.context.clearError();
 
-		console.log('SessionPage session_id = ', session_id);
-
 		SessionApiService.getSession(session_id)
 			.then(this.context.setSession)
 			.catch(this.context.setError);

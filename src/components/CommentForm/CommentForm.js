@@ -65,8 +65,6 @@ export default class CommentForm extends Component {
 		const { session, addComment, setError } = this.context;
 		const { comment, rating } = e.target;
 
-		console.log('commentForm comment = ', comment.value);
-
 		SessionApiService.postComment(
 			session.id,
 			comment.value,

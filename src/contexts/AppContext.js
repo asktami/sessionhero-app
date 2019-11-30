@@ -47,20 +47,7 @@ export class AppProvider extends Component {
 	};
 
 	setError = error => {
-		// TBD How to get the value of the error!???
-		// How do I set error in the API so I can get the message via error.message?
-		console.error(error);
-
-		// {
-		// 	Object.values(error)[0].message;
-		// }
-		// {
-		// 	console.log('Object.values =', Object.values(error)[0].message);
-		// }
-
 		this.setState({ error });
-
-		// this.setState({ error: Object.values(error)[0].message });
 	};
 
 	clearError = () => {

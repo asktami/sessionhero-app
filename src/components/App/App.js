@@ -38,9 +38,6 @@ class App extends Component {
 		if (token) {
 			let parsed = TokenService.parseJwt(token);
 			let loginUserId = parsed.user_id;
-			console.log('--------- App result = ', token);
-			console.log('--------- App parseJwt = ', parsed);
-			console.log('--------- App loginUserId = ', loginUserId);
 			this.context.setLoginUserId(loginUserId);
 		}
 	};

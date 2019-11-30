@@ -41,25 +41,13 @@ export default class LoginForm extends Component {
 				username.value = '';
 				password.value = '';
 
-				console.log('loginForm loginUserId = ', JSON.stringify(res.user_id));
-
 				// save loginUserId
 				this.context.setLoginUserId(res.user_id);
-				// QUESTION - should this be part of the token function?
 
 				TokenService.saveAuthToken(res.authToken);
 
 				this.props.onLoginSuccess();
 			})
-
-			// QUESTION - should I set scheduleList on login?
-			// TBD
-			// .then(() => {
-			// 	// get schedule immediately upon login
-			// 	SessionApiService.getSchedule()
-			// 		.then(this.context.setScheduleList)
-			// 		.catch(this.context.setError);
-			// })
 
 			.catch(res => {
 				this.setState({ error: res.error });

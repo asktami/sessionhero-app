@@ -33,8 +33,6 @@ const AuthApiService = {
           3. queue a call to the refresh endpoint based on the JWT's exp value
         */
 
-				console.log('auth-api-service = ', res);
-
 				TokenService.saveAuthToken(res.authToken);
 				IdleService.regiserIdleTimerResets();
 				TokenService.queueCallbackBeforeExpiry(() => {
@@ -67,7 +65,6 @@ const AuthApiService = {
 				return res;
 			})
 			.catch(err => {
-				console.log('refresh token request error');
 				console.error(err);
 			});
 	}

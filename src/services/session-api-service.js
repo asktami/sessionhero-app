@@ -7,11 +7,7 @@ const SessionApiService = {
 		// will work even when not logged in
 		// pass AuthToken so can use loginUserId when logged in to join sessions + schedule records
 
-		console.log('session-api-service Check AUTH TOKEN');
-
 		if (TokenService.hasAuthToken()) {
-			console.log('session-api-service HAS AUTH TOKEN');
-
 			return fetch(`${config.API_ENDPOINT}/sessions/`, {
 				headers: {
 					'content-type': 'application/json',
@@ -21,8 +17,6 @@ const SessionApiService = {
 				!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
 			);
 		} else {
-			console.log('session-api-service NO AUTH TOKEN');
-
 			return fetch(`${config.API_ENDPOINT}/sessions/`, {
 				headers: {
 					'content-type': 'application/json',
@@ -58,9 +52,6 @@ const SessionApiService = {
 	},
 	getSession(session_id) {
 		// protected endpoint
-
-		console.log('session-api-service session_id = ', session_id);
-
 		return fetch(`${config.API_ENDPOINT}/sessions/${session_id}`, {
 			headers: {
 				'content-type': 'application/json',
