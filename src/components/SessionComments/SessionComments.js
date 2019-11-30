@@ -29,10 +29,12 @@ export default class SessionContents extends Component {
 									<SessionStarRating rating={comment.rating} />
 									<br />
 									<span className="comment-user sponsor">
-										{comment.user.fullname}
+										{comment.fullname}
+										<br />
+										{JSON.stringify(comment)}
 									</span>
 								</div>
-								{comment.user.id === loginUserId ? (
+								{comment.user_id === loginUserId ? (
 									<div className="flex-row comment-btns">
 										<div>
 											<Link

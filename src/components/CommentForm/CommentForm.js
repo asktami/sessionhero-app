@@ -69,6 +69,7 @@ export default class CommentForm extends Component {
 			.then(addComment)
 			.then(() => {
 				text.value = '';
+				this.setState({ errorCount: null });
 			})
 			.catch(setError);
 	};

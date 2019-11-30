@@ -62,8 +62,8 @@ export default class SessionListPage extends Component {
 
 		Promise.all([
 			SessionApiService.addScheduleItem(session_id),
-			SessionApiService.getSessions(),
-			SessionApiService.getSchedule()
+			SessionApiService.getSchedule(),
+			SessionApiService.getSessions()
 		])
 			.then(results => {
 				this.context.addScheduleItem({
@@ -71,11 +71,11 @@ export default class SessionListPage extends Component {
 					user_id: this.context.loginUserId
 				});
 
-				const sessions = results[1];
-				const schedule = results[2];
+				const schedule = results[1];
+				const sessions = results[2];
 
-				this.context.setSessionList(sessions);
 				this.context.setScheduleList(schedule);
+				this.context.setSessionList(sessions);
 			})
 			.catch(this.context.setError);
 	};
@@ -91,16 +91,16 @@ export default class SessionListPage extends Component {
 
 		Promise.all([
 			SessionApiService.deleteScheduleItem(schedule_id),
-			SessionApiService.getSessions(),
-			SessionApiService.getSchedule()
+			SessionApiService.getSchedule(),
+			SessionApiService.getSessions()
 		])
 			.then(results => {
 				this.context.removeScheduleItem(schedule_id);
-				const sessions = results[1];
-				const schedule = results[2];
+				const schedule = results[1];
+				const sessions = results[2];
 
-				this.context.setSessionList(sessions);
 				this.context.setScheduleList(schedule);
+				this.context.setSessionList(sessions);
 			})
 			.catch(this.context.setError);
 	};
@@ -121,7 +121,7 @@ export default class SessionListPage extends Component {
 		if (count === 0)
 			return (
 				<div className="text-center">
-					You haven't added any sessions to your schedule yet.
+					There are no sessions in your schedule.
 				</div>
 			);
 
