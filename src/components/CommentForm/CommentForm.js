@@ -10,9 +10,9 @@ export default class CommentForm extends Component {
 	state = {
 		formValid: false,
 		errorCount: null,
-		text: '',
+		comment: '',
 		errors: {
-			text: ''
+			comment: ''
 		}
 	};
 
@@ -34,7 +34,7 @@ export default class CommentForm extends Component {
 	validateField = (name, value) => {
 		let err = '';
 
-		if (name === 'text') {
+		if (name === 'comment') {
 			if (value.length === 0) {
 				err = 'You must enter a comment';
 			} else if (value.length < 5) {
@@ -63,12 +63,18 @@ export default class CommentForm extends Component {
 
 		// get the form fields from the event
 		const { session, addComment, setError } = this.context;
-		const { text, rating } = e.target;
+		const { comment, rating } = e.target;
 
-		SessionApiService.postComment(session.id, text.value, Number(rating.value))
+		console.log('commentForm comment = ', comment.value);
+
+		SessionApiService.postComment(
+			session.id,
+			comment.value,
+			Number(rating.value)
+		)
 			.then(addComment)
 			.then(() => {
-				text.value = '';
+				comment.value = '';
 				this.setState({ errorCount: null });
 			})
 			.catch(setError);
@@ -87,17 +93,17 @@ export default class CommentForm extends Component {
 						<div className="text">
 							<textarea
 								aria-label="Type a comment..."
-								name="text"
-								id="text"
+								name="comment"
+								id="comment"
 								placeholder="Type a comment.."
 								required
 								aria-required="true"
-								aria-describedby="textError"
+								aria-describedby="commentError"
 								aria-invalid="true"
 								onChange={this.handleChange}
 							/>
-							{errors.text.length > 0 && (
-								<ValidationError message={errors.text} id={'textError'} />
+							{errors.comment.length > 0 && (
+								<ValidationError message={errors.comment} id={'commentError'} />
 							)}
 							<br />
 						</div>

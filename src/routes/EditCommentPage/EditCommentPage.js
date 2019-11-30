@@ -18,11 +18,11 @@ class EditComment extends React.Component {
 		formValid: true,
 		errorCount: null,
 		id: '',
-		text: '',
+		comment: '',
 		rating: '',
 		session_id: '',
 		errors: {
-			text: '',
+			comment: '',
 			rating: ''
 		}
 	};
@@ -39,7 +39,7 @@ class EditComment extends React.Component {
 			.then(responseData => {
 				this.setState({
 					id: responseData.id,
-					text: responseData.text,
+					comment: responseData.comment,
 					rating: responseData.rating,
 					session_id: responseData.session_id
 				});
@@ -67,7 +67,7 @@ class EditComment extends React.Component {
 	validateField = (name, value) => {
 		let err = '';
 
-		if (name === 'text') {
+		if (name === 'comment') {
 			if (value.length === 0) {
 				err = 'You must enter a comment';
 			} else if (value.length < 5) {
@@ -107,7 +107,7 @@ class EditComment extends React.Component {
 	resetFields = newFields => {
 		this.setState({
 			id: newFields.id || '',
-			text: newFields.text || '',
+			comment: newFields.comment || '',
 			rating: newFields.rating || '',
 			session_id: newFields.session_id || ''
 		});
@@ -124,7 +124,7 @@ class EditComment extends React.Component {
 
 		const updatedComment = {
 			id: comment_id,
-			text: this.state.text,
+			comment: this.state.comment,
 			rating: parseInt(this.state.rating),
 			modified: new Date()
 		};
@@ -139,27 +139,27 @@ class EditComment extends React.Component {
 	};
 
 	render() {
-		const { errors, text, rating } = this.state;
+		const { errors, comment, rating } = this.state;
 
 		return (
 			<form onSubmit={this.handleSubmit}>
 				<fieldset>
 					<legend></legend>
-					<label htmlFor="text">Comment</label>
+					<label htmlFor="comment">Comment</label>
 					<textarea
-						id="text"
-						name="text"
+						id="comment"
+						name="comment"
 						placeholder="Type a comment.."
 						required
 						aria-required="true"
-						aria-describedby="textError"
+						aria-describedby="commentError"
 						aria-label="Edit comment..."
 						aria-invalid="true"
-						value={text}
+						value={comment}
 						onChange={this.handleChange}
 					/>
-					{errors.text.length > 0 && (
-						<ValidationError id={'textError'} message={errors.text} />
+					{errors.comment.length > 0 && (
+						<ValidationError id={'commentError'} message={errors.comment} />
 					)}
 					<label htmlFor="rating">Rating</label>
 					<select

@@ -126,7 +126,7 @@ const SessionApiService = {
 			// 	!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
 		);
 	},
-	postComment(session_id, text, rating) {
+	postComment(session_id, comment, rating) {
 		// protected endpoint
 		return fetch(`${config.API_ENDPOINT}/comments`, {
 			method: 'POST',
@@ -136,7 +136,7 @@ const SessionApiService = {
 			},
 			body: JSON.stringify({
 				session_id,
-				text,
+				comment,
 				rating
 			})
 		}).then(res =>

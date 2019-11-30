@@ -21,7 +21,7 @@ export default class SessionContents extends Component {
 				{(comments || []).map(comment => (
 					<li key={comment.id} className="comment-item">
 						<div className="comment-text">
-							{comment.text}
+							{comment.comment}
 							<br />
 
 							<div className="flex-row comment-footer ">

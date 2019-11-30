@@ -140,7 +140,7 @@
 	"comments": [
 		{
 			"id": 1,
-			"text": "This thing is amazing.",
+			"comment": "This thing is amazing.",
 			"rating": 4,
 			"date_created": "2019-10-31 23:14:12.649275",
 			"session_id": "BUS04",
@@ -148,7 +148,7 @@
 		},
 		{
 			"id": 2,
-			"text": "Put a bird on it!",
+			"comment": "Put a bird on it!",
 			"rating": 4,
 			"date_created": "2019-10-31 23:14:12.649275",
 			"session_id": "BUS04",
@@ -156,7 +156,7 @@
 		},
 		{
 			"id": 3,
-			"text": "All the other reviewers are obviously insane, but this thing is actually pretty amazing.",
+			"comment": "All the other reviewers are obviously insane, but this thing is actually pretty amazing.",
 			"rating": 5,
 			"date_created": "2019-10-31 23:14:12.649275",
 			"session_id": "CRE12",
@@ -164,7 +164,7 @@
 		},
 		{
 			"id": 4,
-			"text": "When life gives you lemons, trade them for this thing.",
+			"comment": "When life gives you lemons, trade them for this thing.",
 			"rating": 4,
 			"date_created": "2019-10-31 23:14:12.649275",
 			"session_id": "CRE12",

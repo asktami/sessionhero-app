@@ -11,7 +11,7 @@ exports[`SessionListItem component renders a SessionListItem by default 1`] = `
       >
         Tue
       </span>
-       
+
       <span
         className="day-of-week"
       >
@@ -81,7 +81,7 @@ exports[`SessionListItem component renders a SessionListItem by default 1`] = `
       className="flex-col-then-row hide track business"
     >
       <div
-        className="track-text"
+        className="track-comment"
       >
         Business
       </div>
@@ -178,7 +178,7 @@ exports[`SessionListItem component renders the SessionListItem given props 1`] =
       >
         Tue
       </span>
-       
+
       <span
         className="day-of-week"
       >
