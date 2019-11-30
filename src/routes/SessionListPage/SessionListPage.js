@@ -32,66 +32,42 @@ export default class SessionListPage extends Component {
 	}
 
 	addToSchedule = session_id => {
-		// SessionApiService.addScheduleItem(session_id)
-		// 	.then(
-		// 		this.context.addScheduleItem({
-		// 			session_id: session_id,
-		// 			user_id: this.context.loginUserId
-		// 		})
-		// 	)
-		// 	.then(SessionApiService.getSessions())
-		// 	.catch(this.context.setError);
+		// add session tp schedule
+		// AND add user_id on that session record in sessionList
 
-		Promise.all([
-			SessionApiService.addScheduleItem(session_id),
-			SessionApiService.getSchedule(),
-			SessionApiService.getSessions()
-		])
-			.then(results => {
-				this.context.addScheduleItem({
-					session_id: session_id,
-					user_id: this.context.loginUserId
+		this.context.addScheduleItem({
+			session_id: session_id,
+			user_id: this.context.loginUserId
+		});
+
+		SessionApiService.addScheduleItem(session_id)
+			.then(() => {
+				SessionApiService.getSchedule().then(scheduleResult => {
+					SessionApiService.getSessions().then(sessionResult => {
+						this.context.setScheduleList(scheduleResult);
+						this.context.setSessionList(sessionResult);
+					});
 				});
-
-				const schedule = results[1];
-				const sessions = results[2];
-
-				this.context.setScheduleList(schedule);
-				this.context.setSessionList(sessions);
 			})
 			.catch(this.context.setError);
-
-		//force reload to see updated stars
-		// TBD LOSE CURRENT FILTER!!!!
-		window.location.reload(false);
 	};
 
 	removeFromSchedule = schedule_id => {
 		// remove session from schedule
 		// AND clear user_id on that session record in sessionList
-		// SessionApiService.deleteScheduleItem(schedule_id)
-		// 	.then(this.context.removeScheduleItem(schedule_id))
-		// 	.then(SessionApiService.getSessions())
-		// 	.then(SessionApiService.getSchedule())
-		// 	.catch(this.context.setError);
 
-		Promise.all([
-			SessionApiService.deleteScheduleItem(schedule_id),
-			SessionApiService.getSchedule(),
-			SessionApiService.getSessions()
-		])
-			.then(results => {
-				this.context.removeScheduleItem(schedule_id);
-				const schedule = results[1];
-				const sessions = results[2];
+		this.context.removeScheduleItem(schedule_id);
 
-				this.context.setScheduleList(schedule);
-				this.context.setSessionList(sessions);
+		SessionApiService.deleteScheduleItem(schedule_id)
+			.then(() => {
+				SessionApiService.getSchedule().then(scheduleResult => {
+					SessionApiService.getSessions().then(sessionResult => {
+						this.context.setScheduleList(scheduleResult);
+						this.context.setSessionList(sessionResult);
+					});
+				});
 			})
 			.catch(this.context.setError);
-
-		//force reload to see updated stars
-		window.location.reload(false);
 	};
 
 	renderSessions() {
