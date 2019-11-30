@@ -31,24 +31,6 @@ export default class SessionListPage extends Component {
 			.catch(this.context.setError);
 	}
 
-	// updateSessionList() {
-	// 	const { sessionList = [], scheduleList = [] } = this.context;
-
-	// 	// automatically update sessionList in context
-	// 	// add schedule user id to applicable session records
-	// 	// simulating a sessions + schedule left table join
-	// 	sessionList.forEach(session => {
-	// 		scheduleList.forEach(schedule => {
-	// 			if (schedule.session_id === session.id) {
-	// 				session.user_id = schedule.user_id;
-	// 			}
-	// 			// else {
-	// 			// 	session.user_id = '';
-	// 			// }
-	// 		});
-	// 	});
-	// }
-
 	addToSchedule = session_id => {
 		// SessionApiService.addScheduleItem(session_id)
 		// 	.then(
@@ -78,6 +60,10 @@ export default class SessionListPage extends Component {
 				this.context.setSessionList(sessions);
 			})
 			.catch(this.context.setError);
+
+		//force reload to see updated stars
+		// TBD LOSE CURRENT FILTER!!!!
+		window.location.reload(false);
 	};
 
 	removeFromSchedule = schedule_id => {
@@ -103,6 +89,9 @@ export default class SessionListPage extends Component {
 				this.context.setSessionList(sessions);
 			})
 			.catch(this.context.setError);
+
+		//force reload to see updated stars
+		window.location.reload(false);
 	};
 
 	renderSessions() {

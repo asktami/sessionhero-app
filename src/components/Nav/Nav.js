@@ -14,7 +14,6 @@ class Nav extends Component {
 	handleLogoutClick = () => {
 		TokenService.clearAuthToken();
 		this.context.setLoginUserId('');
-		// QUESTION - should this be part of the token function?
 	};
 
 	renderLogoutLink() {
