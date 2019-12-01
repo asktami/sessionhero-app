@@ -33,26 +33,28 @@ Works with [https://github.com/asktami/sessionhero-api](https://github.com/askta
 
 # Built With
 
-    - React
-    - React-Router
-    - PostgreSQL
-    - Knex
-    - Node
-    - Express
-    - bcryptjs
-    - jsonwebtoken
+- React
+- React-Router
+- PostgreSQL
+- Knex
+- Node
+- Express
+- bcryptjs
+- jsonwebtoken
 
 # Tested With
 
-    ## Frontend:
-        - Jasmine
-        - Jest
-        - Enzyme
+## Frontend:
 
-    ## Backend:
-        - Mocha
-        - Chai
-        - Supertest
+- Jasmine
+- Jest
+- Enzyme
+
+## Backend:
+
+- Mocha
+- Chai
+- Supertest
 
 ## Setup
 
