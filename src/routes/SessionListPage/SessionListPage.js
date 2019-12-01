@@ -108,6 +108,7 @@ export default class SessionListPage extends Component {
 						pathname={this.props.location.pathname}
 						addToSchedule={this.addToSchedule}
 						removeFromSchedule={this.removeFromSchedule}
+						hideStars={false}
 					/>
 				</li>
 			));

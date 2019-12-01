@@ -60,10 +60,10 @@ export default class SessionListItem extends Component {
 								<Link to={`/sessions/${session.session_id}`}>
 									<span className="simple title">{session.name}</span>
 								</Link>
-								<br />
+								{/* <br />
 								session.session_id = {session.session_id}
 								<br />
-								session.user_id = {session.user_id}
+								session.user_id = {session.user_id} */}
 							</span>
 							<br />
 							<span className="location">{session.location}</span>
@@ -94,7 +94,9 @@ export default class SessionListItem extends Component {
 							</button>
 						) : null}
 
-						{loginUserId && session.user_id === loginUserId ? (
+						{loginUserId &&
+						session.user_id === loginUserId &&
+						this.props.hideStars === false ? (
 							<button
 								className="btn-remove-from-schedule"
 								aria-label="add-session-to-schedule-button"
@@ -106,8 +108,9 @@ export default class SessionListItem extends Component {
 								<FontAwesomeIcon icon={['fas', 'star']} size="2x" />
 							</button>
 						) : null}
-
-						{loginUserId && session.user_id !== loginUserId ? (
+						{loginUserId &&
+						session.user_id !== loginUserId &&
+						this.props.hideStars === false ? (
 							<button
 								className="btn-add-to-schedule"
 								aria-label="add-session-to-schedule-button"

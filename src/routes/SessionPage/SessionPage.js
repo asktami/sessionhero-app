@@ -39,6 +39,7 @@ export default class SessionPage extends Component {
 				<SessionListItem
 					session={session}
 					pathname={this.props.location.pathname}
+					hideStars={true}
 				/>
 				<SessionComments />
 				<CommentForm />
