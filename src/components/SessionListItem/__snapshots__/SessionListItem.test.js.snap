@@ -11,7 +11,7 @@ exports[`SessionListItem component renders a SessionListItem by default 1`] = `
       >
         Tue
       </span>
-
+       
       <span
         className="day-of-week"
       >
@@ -60,7 +60,7 @@ exports[`SessionListItem component renders a SessionListItem by default 1`] = `
         <span>
           <Link
             replace={false}
-            to="/sessions/BUS04"
+            to="/sessions/undefined"
           >
             <span
               className="simple title"
@@ -81,7 +81,7 @@ exports[`SessionListItem component renders a SessionListItem by default 1`] = `
       className="flex-col-then-row hide track business"
     >
       <div
-        className="track-comment"
+        className="track-text"
       >
         Business
       </div>
@@ -96,24 +96,14 @@ exports[`SessionListItem component renders a SessionListItem by default 1`] = `
         onClick={[Function]}
       >
         <FontAwesomeIcon
-          icon="chevron-down"
-          size="2x"
-        />
-      </button>
-      <button
-        aria-label="add-session-to-schedule-button"
-        className="btn-add-to-schedule"
-        onClick={[Function]}
-      >
-        <FontAwesomeIcon
-          icon="star"
+          icon="chevron-up"
           size="2x"
         />
       </button>
     </div>
   </div>
   <div
-    className="flex-footer-row toggle-content null"
+    className="flex-footer-row toggle-content is-visible"
   >
     <div>
       <p
@@ -178,7 +168,7 @@ exports[`SessionListItem component renders the SessionListItem given props 1`] =
       >
         Tue
       </span>
-
+       
       <span
         className="day-of-week"
       >
@@ -227,7 +217,7 @@ exports[`SessionListItem component renders the SessionListItem given props 1`] =
         <span>
           <Link
             replace={false}
-            to="/sessions/BUS04"
+            to="/sessions/undefined"
           >
             <span
               className="simple title"
@@ -263,24 +253,14 @@ exports[`SessionListItem component renders the SessionListItem given props 1`] =
         onClick={[Function]}
       >
         <FontAwesomeIcon
-          icon="chevron-down"
-          size="2x"
-        />
-      </button>
-      <button
-        aria-label="add-session-to-schedule-button"
-        className="btn-add-to-schedule"
-        onClick={[Function]}
-      >
-        <FontAwesomeIcon
-          icon="star"
+          icon="chevron-up"
           size="2x"
         />
       </button>
     </div>
   </div>
   <div
-    className="flex-footer-row toggle-content null"
+    className="flex-footer-row toggle-content is-visible"
   >
     <div>
       <p
