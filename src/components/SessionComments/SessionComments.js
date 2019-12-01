@@ -30,8 +30,6 @@ export default class SessionContents extends Component {
 									<br />
 									<span className="comment-user sponsor">
 										{comment.fullname}
-										<br />
-										{JSON.stringify(comment)}
 									</span>
 								</div>
 								{comment.user_id === loginUserId ? (
