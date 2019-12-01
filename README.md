@@ -14,19 +14,17 @@ Attendee Conference Session Scheduler / SessionTracker / Agenda Builder
 
 - anyone going to the home page will see a list of all sessions
 
-- anyone can filter the list by day or track
+- anyone can filter the session list by day or track
 
 - anyone can register and login
 
-- after logging in the user sees the session list, and:
+- after logging in, you can click on a session to add comments
 
-- can click on a session to add comments
+- after logging in, you can click on a star to add a session to / remove a session from their schedule
 
-- can click on a star to add a session to / remove a session from their schedule
+- after logging in, you can see your schedule, i.e. list of sessions they plan on attending
 
-- can see their schedule, i.e. list of sessions they plan on attending
-
-- can filter their schedule by day or track
+- after logging in, you can filter your schedule by day or track
 
 Works with [https://github.com/asktami/sessionhero-api](https://github.com/asktami/sessionhero-api).
 
