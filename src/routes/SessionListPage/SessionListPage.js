@@ -6,6 +6,10 @@ import SessionListItem from '../../components/SessionListItem/SessionListItem';
 
 import './SessionListPage.css';
 
+// using trackPromise so can use LoadingIndicator
+import { trackPromise } from 'react-promise-tracker';
+import LoadingIndicator from '../../components/LoadingIndicator/LoadingIndicator';
+
 export default class SessionListPage extends Component {
 	static contextType = AppContext;
 
@@ -17,18 +21,20 @@ export default class SessionListPage extends Component {
 		this.context.clearError();
 		this.context.clearFilters();
 
-		Promise.all([
-			SessionApiService.getSchedule(),
-			SessionApiService.getSessions()
-		])
-			.then(results => {
-				const schedule = results[0];
-				const sessions = results[1];
+		trackPromise(
+			Promise.all([
+				SessionApiService.getSchedule(),
+				SessionApiService.getSessions()
+			])
+				.then(results => {
+					const schedule = results[0];
+					const sessions = results[1];
 
-				this.context.setScheduleList(schedule);
-				this.context.setSessionList(sessions);
-			})
-			.catch(this.context.setError);
+					this.context.setScheduleList(schedule);
+					this.context.setSessionList(sessions);
+				})
+				.catch(this.context.setError)
+		);
 	}
 
 	addToSchedule = session_id => {
@@ -83,12 +89,18 @@ export default class SessionListPage extends Component {
 		}
 
 		let count = sessionOrScheduleList.length;
-		if (count === 0)
+
+		if (count === 0 && this.props.location.pathname === '/') {
+			return <div className="text-center">Sessions are loading.</div>;
+		}
+
+		if (count === 0 && this.props.location.pathname !== '/') {
 			return (
 				<div className="text-center">
 					There are no sessions in your schedule.
 				</div>
 			);
+		}
 
 		// apply search filters: filterDay and filterTrack
 		result = sessionOrScheduleList
@@ -134,6 +146,8 @@ export default class SessionListPage extends Component {
 				) : (
 					this.renderSessions()
 				)}
+
+				<LoadingIndicator />
 			</section>
 		);
 	}
