@@ -10,7 +10,7 @@
 		"eject": "react-scripts eject",
 		"predeploy": "npm run build",
 		"deploy": "now ./build",
-		"postdeploy": "now --target production"
+		"postdeploy": "now --prod"
 	},
 	"dependencies": {
 		"@fortawesome/fontawesome-svg-core": "^1.2.25",
