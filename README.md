@@ -31,7 +31,7 @@ Attendee Conference Session Scheduler / SessionTracker / Agenda Builder
 
 Works with [https://github.com/asktami/sessionhero-api](https://github.com/asktami/sessionhero-api).
 
-# Built With
+## Built With
 
 - React
 - React-Router
@@ -42,15 +42,15 @@ Works with [https://github.com/asktami/sessionhero-api](https://github.com/askta
 - bcryptjs
 - jsonwebtoken
 
-# Tested With
+## Tested With
 
-## Frontend:
+### Frontend:
 
 - Jasmine
 - Jest
 - Enzyme
 
-## Backend:
+### Backend:
 
 - Mocha
 - Chai
