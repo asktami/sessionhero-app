@@ -1,6 +1,6 @@
 {
 	"version": 2,
-	"alias": "sessionhero-app",
+	"alias": "asktami-sessionhero-app",
 	"name": "sessionhero-app",
 	"routes": [
 		{
