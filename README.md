@@ -8,7 +8,7 @@
 
 Attendee Conference Session Scheduler / SessionTracker / Agenda Builder
 
-- Fullstack App
+- a React Fullstack App
 
 - uses the FileMaker DevCon 2019 sessions list (exported from FMDevToGo from [https://www.filemaker.com/](https://www.filemaker.com/))
 
