@@ -46,9 +46,6 @@ Works with [https://github.com/asktami/sessionhero-api](https://github.com/askta
 - Jasmine
 - Jest
 - Enzyme
-
-### Backend:
-
 - Mocha
 - Chai
 - Supertest
