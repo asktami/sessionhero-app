@@ -23,9 +23,9 @@ class Header extends Component {
 						</p>
 
 						<p>
-							Demo Username: demoUser
+							Demo Username: testUser
 							<br />
-							Demo Password: demoUser123*
+							Demo Password: testUser123@
 						</p>
 					</>
 				);
