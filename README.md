@@ -41,8 +41,6 @@ Works with [https://github.com/asktami/sessionhero-api](https://github.com/askta
 
 ## Tested With
 
-### Frontend:
-
 - Jasmine
 - Jest
 - Enzyme
