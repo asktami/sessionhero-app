@@ -1,10 +1,8 @@
 // hosted on Heroku using PostgreSQL db
 export default {
 	DATASOURCE: `postgresql`,
-	API_ENDPOINT:
-		process.env.REACT_APP_API_BASE_URL || 'http://localhost:3000/api',
-	AUTH_ENDPOINT:
-		process.env.REACT_APP_API_BASE_URL || 'http://localhost:3000/api',
+	API_ENDPOINT: `https://cors-anywhere.herokuapp.com/https://asktami-sessionhero-api.herokuapp.com/api/`,
+	AUTH_ENDPOINT: `https://cors-anywhere.herokuapp.com/https://asktami-sessionhero-api.herokuapp.com/api/`,
 	TOKEN_KEY: process.env.REACT_APP_API_KEY
 };
 
