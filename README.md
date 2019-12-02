@@ -20,9 +20,9 @@ Attendee Conference Session Scheduler / SessionTracker / Agenda Builder
 
 - after logging in, you can click on a session to add comments
 
-- after logging in, you can click on a star to add a session to / remove a session from their schedule
+- after logging in, you can click on a star to add a session to / remove a session from your schedule
 
-- after logging in, you can see your schedule, i.e. list of sessions they plan on attending
+- after logging in, you can see your schedule, i.e. list of sessions you plan on attending
 
 - after logging in, you can filter your schedule by day or track
 
