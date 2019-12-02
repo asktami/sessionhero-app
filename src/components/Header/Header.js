@@ -13,8 +13,9 @@ class Header extends Component {
 				return (
 					<>
 						<p>
-							Search for conference sessions, add conference sessions to your
-							schedule, comment on sessions, and see comments made by others.
+							Search for conference sessions, click on stars to add/remove
+							conference sessions to/from your schedule, comment on sessions,
+							and see comments made by others.
 						</p>
 
 						<p>
