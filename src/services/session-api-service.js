@@ -24,8 +24,11 @@ const SessionApiService = {
 				}
 			}).then(res => {
 				// NOTE: sometimes comes back with e.headers.get() is null and so errors with cannot ready propery indexOf of null
-				// const isJSON =
-				// 	res.headers.get('content-type').indexOf('application/json') !== -1;
+				const isJSON =
+					res.headers.get('content-type') !== null &&
+					res.headers.get('content-type').indexOf('application/json') !== -1
+						? res.headers.get('content-type').indexOf('application/json') !== -1
+						: null;
 
 				// console.log('contentType = ', contentType);
 				// console.log('isJSON = ', isJSON);
