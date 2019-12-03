@@ -32,20 +32,21 @@ const SessionApiService = {
 				// replaced:
 				// return !res.ok ? res.json().then(e => Promise.reject(e)) : res.json();
 
+				// ON HOLD b/c issues with different text errors
 				// convert reject (e) to text inside pre tags
 
-				const resultRegex = '(<pre>)(.*?)(</pre>)';
-				let regex = new RegExp(resultRegex);
+				// const resultRegex = '(<pre>)(.*?)(</pre>)';
+				// let regex = new RegExp(resultRegex);
 
-				let getError = e => {
-					let result = regex.exec(e);
-					return result;
-				};
+				// let getError = e => {
+				// 	let result = regex.exec(e);
+				// 	return result;
+				// };
 
 				return !res.ok
 					? isJSON
 						? res.json().then(e => Promise.reject(e))
-						: res.text().then(e => Promise.reject(getError(e)))
+						: res.text().then(e => Promise.reject(e))
 					: res.json();
 			});
 		}
