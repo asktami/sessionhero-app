@@ -22,9 +22,28 @@ const SessionApiService = {
 					'content-type': 'application/json',
 					authorization: `none`
 				}
-			}).then(res =>
-				!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
-			);
+			}).then(res => {
+				const contentType = res.headers.get('content-type');
+				const isJSON =
+					res.headers.get('content-type').indexOf('application/json') !== -1;
+
+				// console.log('contentType = ', contentType);
+				// console.log('isJSON = ', isJSON);
+
+				// replaced:
+				// return !res.ok ? res.json().then(e => Promise.reject(e)) : res.json();
+
+				// convert reject (e) to text inside pre tags
+
+				const resultRegex = '(?<=<pre>).*?(?=</pre>)';
+				let regex = new RegExp(resultRegex);
+
+				return !res.ok
+					? isJSON
+						? res.json().then(e => Promise.reject(e))
+						: res.text().then(e => Promise.reject(regex.exec(e)))
+					: res.json();
+			});
 		}
 	},
 	getSchedule() {

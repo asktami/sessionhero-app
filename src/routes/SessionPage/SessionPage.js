@@ -52,7 +52,7 @@ export default class SessionPage extends Component {
 		let content;
 		if (error) {
 			content =
-				error.error === `Session doesn't exist` ? (
+				error.message === `Session doesn't exist` ? (
 					<p className="error">Session not found</p>
 				) : (
 					<p className="error">There was an error</p>

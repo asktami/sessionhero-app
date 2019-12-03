@@ -141,7 +141,9 @@ export default class SessionListPage extends Component {
 					<p className="error">
 						There was an error, try again.
 						<br />
-						{JSON.stringify(error)}
+						{error.message
+							? error.message
+							: JSON.parse(JSON.stringify(error[0]))}
 					</p>
 				) : (
 					this.renderSessions()
