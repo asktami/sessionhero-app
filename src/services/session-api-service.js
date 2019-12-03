@@ -23,7 +23,6 @@ const SessionApiService = {
 					authorization: `none`
 				}
 			}).then(res => {
-				const contentType = res.headers.get('content-type');
 				const isJSON =
 					res.headers.get('content-type').indexOf('application/json') !== -1;
 
