@@ -17,7 +17,7 @@ const SessionApiService = {
 				!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
 			);
 		} else {
-			return fetch(`${config.API_ENDPOINT}/sessionsXXX/`, {
+			return fetch(`${config.API_ENDPOINT}/sessions/`, {
 				headers: {
 					'content-type': 'application/json',
 					authorization: `none`
