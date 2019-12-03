@@ -17,7 +17,7 @@ const SessionApiService = {
 				!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
 			);
 		} else {
-			return fetch(`${config.API_ENDPOINT}/sessions/`, {
+			return fetch(`${config.API_ENDPOINT}/sessionsXXX/`, {
 				headers: {
 					'content-type': 'application/json',
 					authorization: `none`
@@ -35,13 +35,18 @@ const SessionApiService = {
 
 				// convert reject (e) to text inside pre tags
 
-				const resultRegex = '(?<=<pre>).*?(?=</pre>)';
+				const resultRegex = '(<pre>)(.*?)(</pre>)';
 				let regex = new RegExp(resultRegex);
+
+				let getError = e => {
+					let result = regex.exec(e);
+					return result;
+				};
 
 				return !res.ok
 					? isJSON
 						? res.json().then(e => Promise.reject(e))
-						: res.text().then(e => Promise.reject(regex.exec(e)))
+						: res.text().then(e => Promise.reject(getError(e)))
 					: res.json();
 			});
 		}
