@@ -10,6 +10,8 @@ import './SessionListPage.css';
 import { trackPromise } from 'react-promise-tracker';
 import LoadingIndicator from '../../components/LoadingIndicator/LoadingIndicator';
 
+import LoadingIndicatorStar from '../../components/LoadingIndicatorStar/LoadingIndicatorStar';
+
 export default class SessionListPage extends Component {
 	static contextType = AppContext;
 
@@ -46,16 +48,19 @@ export default class SessionListPage extends Component {
 			user_id: this.context.loginUserId
 		});
 
-		SessionApiService.addScheduleItem(session_id)
-			.then(() => {
-				SessionApiService.getSchedule().then(scheduleResult => {
-					SessionApiService.getSessions().then(sessionResult => {
-						this.context.setScheduleList(scheduleResult);
-						this.context.setSessionList(sessionResult);
+		trackPromise(
+			SessionApiService.addScheduleItem(session_id)
+				.then(() => {
+					SessionApiService.getSchedule().then(scheduleResult => {
+						SessionApiService.getSessions().then(sessionResult => {
+							this.context.setScheduleList(scheduleResult);
+							this.context.setSessionList(sessionResult);
+						});
 					});
-				});
-			})
-			.catch(this.context.setError);
+				})
+				.catch(this.context.setError),
+			'stars-add'
+		);
 	};
 
 	removeFromSchedule = schedule_id => {
@@ -64,16 +69,19 @@ export default class SessionListPage extends Component {
 
 		this.context.removeScheduleItem(schedule_id);
 
-		SessionApiService.deleteScheduleItem(schedule_id)
-			.then(() => {
-				SessionApiService.getSchedule().then(scheduleResult => {
-					SessionApiService.getSessions().then(sessionResult => {
-						this.context.setScheduleList(scheduleResult);
-						this.context.setSessionList(sessionResult);
+		trackPromise(
+			SessionApiService.deleteScheduleItem(schedule_id)
+				.then(() => {
+					SessionApiService.getSchedule().then(scheduleResult => {
+						SessionApiService.getSessions().then(sessionResult => {
+							// this.context.setScheduleList(scheduleResult);
+							this.context.setSessionList(sessionResult);
+						});
 					});
-				});
-			})
-			.catch(this.context.setError);
+				})
+				.catch(this.context.setError),
+			'stars-remove'
+		);
 	};
 
 	renderSessions() {

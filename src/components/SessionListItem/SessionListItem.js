@@ -11,12 +11,18 @@ import {
 } from '../../components/Utils/Utils';
 import './SessionListItem.css';
 
+// using trackPromise so can use LoadingIndicator
+import { trackPromise } from 'react-promise-tracker';
+import LoadingIndicatorStar from '../LoadingIndicatorStar/LoadingIndicatorStar';
+
 export default class SessionListItem extends Component {
 	static contextType = AppContext;
 
 	render() {
 		const { loginUserId, setToggleId, toggleId, expandAll } = this.context;
 		const { session, pathname } = this.props;
+
+		console.log('pathname = ', this.props.pathname);
 
 		return (
 			<>
@@ -97,27 +103,36 @@ export default class SessionListItem extends Component {
 						{loginUserId &&
 						session.user_id === loginUserId &&
 						this.props.hideStars === false ? (
-							<button
-								className="btn-remove-from-schedule"
-								aria-label="add-session-to-schedule-button"
-								onClick={() =>
-									this.props.removeFromSchedule(session.schedule_id)
-								}
-							>
-								<br />
-								<FontAwesomeIcon icon={['fas', 'star']} size="2x" />
-							</button>
+							<>
+								<button
+									className="btn-remove-from-schedule"
+									aria-label="add-session-to-schedule-button"
+									onClick={() =>
+										this.props.removeFromSchedule(session.schedule_id)
+									}
+								>
+									<br />
+									<FontAwesomeIcon icon={['fas', 'star']} size="2x" />
+								</button>
+
+								{this.props.pathname !== '/schedule' ? (
+									<LoadingIndicatorStar area="stars-remove" />
+								) : null}
+							</>
 						) : null}
 						{loginUserId &&
 						session.user_id !== loginUserId &&
 						this.props.hideStars === false ? (
-							<button
-								className="btn-add-to-schedule"
-								aria-label="add-session-to-schedule-button"
-								onClick={() => this.props.addToSchedule(session.session_id)}
-							>
-								<FontAwesomeIcon icon={['far', 'star']} size="2x" />
-							</button>
+							<>
+								<button
+									className="btn-add-to-schedule"
+									aria-label="add-session-to-schedule-button"
+									onClick={() => this.props.addToSchedule(session.session_id)}
+								>
+									<FontAwesomeIcon icon={['far', 'star']} size="2x" />
+								</button>
+								<LoadingIndicatorStar area="stars-add" />
+							</>
 						) : null}
 					</div>
 				</div>
