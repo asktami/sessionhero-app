@@ -100,6 +100,7 @@ exports[`SessionListItem component renders a SessionListItem by default 1`] = `
           size="2x"
         />
       </button>
+      <br />
     </div>
   </div>
   <div
@@ -257,6 +258,7 @@ exports[`SessionListItem component renders the SessionListItem given props 1`] =
           size="2x"
         />
       </button>
+      <br />
     </div>
   </div>
   <div
