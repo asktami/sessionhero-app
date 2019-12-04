@@ -180,7 +180,6 @@ small {
 .required,
 .error {
 	color: #ca1551;
-	font-family: Arial;
 	font-weight: bold;
 }
 
@@ -724,4 +723,12 @@ label.star:before {
 	margin: 0 auto;
 	font-family: 'Coming Soon', cursive;
 	text-align: center;
+}
+
+.processing {
+	margin: 0 auto;
+	font-family: 'Coming Soon', cursive;
+	text-align: center;
+	color: #bd8400; /* darkgold */
+	font-weight: bold;
 }

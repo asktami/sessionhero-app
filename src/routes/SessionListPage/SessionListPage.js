@@ -10,8 +10,6 @@ import './SessionListPage.css';
 import { trackPromise } from 'react-promise-tracker';
 import LoadingIndicator from '../../components/LoadingIndicator/LoadingIndicator';
 
-import LoadingIndicatorStar from '../../components/LoadingIndicatorStar/LoadingIndicatorStar';
-
 export default class SessionListPage extends Component {
 	static contextType = AppContext;
 
@@ -23,12 +21,15 @@ export default class SessionListPage extends Component {
 		this.context.clearError();
 		this.context.clearFilters();
 
+		console.time('stars');
 		trackPromise(
 			Promise.all([
 				SessionApiService.getSchedule(),
 				SessionApiService.getSessions()
 			])
 				.then(results => {
+					console.timeEnd('stars');
+
 					const schedule = results[0];
 					const sessions = results[1];
 
@@ -38,51 +39,6 @@ export default class SessionListPage extends Component {
 				.catch(this.context.setError)
 		);
 	}
-
-	addToSchedule = session_id => {
-		// add session tp schedule
-		// AND add user_id on that session record in sessionList
-
-		this.context.addScheduleItem({
-			session_id: session_id,
-			user_id: this.context.loginUserId
-		});
-
-		trackPromise(
-			SessionApiService.addScheduleItem(session_id)
-				.then(() => {
-					SessionApiService.getSchedule().then(scheduleResult => {
-						SessionApiService.getSessions().then(sessionResult => {
-							this.context.setScheduleList(scheduleResult);
-							this.context.setSessionList(sessionResult);
-						});
-					});
-				})
-				.catch(this.context.setError),
-			'stars-add'
-		);
-	};
-
-	removeFromSchedule = schedule_id => {
-		// remove session from schedule
-		// AND clear user_id on that session record in sessionList
-
-		this.context.removeScheduleItem(schedule_id);
-
-		trackPromise(
-			SessionApiService.deleteScheduleItem(schedule_id)
-				.then(() => {
-					SessionApiService.getSchedule().then(scheduleResult => {
-						SessionApiService.getSessions().then(sessionResult => {
-							// this.context.setScheduleList(scheduleResult);
-							this.context.setSessionList(sessionResult);
-						});
-					});
-				})
-				.catch(this.context.setError),
-			'stars-remove'
-		);
-	};
 
 	renderSessions() {
 		const { sessionList = [], scheduleList = [] } = this.context;
@@ -126,8 +82,6 @@ export default class SessionListPage extends Component {
 					<SessionListItem
 						session={session}
 						pathname={this.props.location.pathname}
-						addToSchedule={this.addToSchedule}
-						removeFromSchedule={this.removeFromSchedule}
 						hideStars={false}
 					/>
 				</li>

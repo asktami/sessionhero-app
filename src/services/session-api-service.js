@@ -16,6 +16,8 @@ const SessionApiService = {
 			}).then(res =>
 				!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
 			);
+
+			// return Promise.resolve();
 		} else {
 			return fetch(`${config.API_ENDPOINT}/sessions/`, {
 				headers: {

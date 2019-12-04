@@ -11,18 +11,77 @@ import {
 } from '../../components/Utils/Utils';
 import './SessionListItem.css';
 
-// using trackPromise so can use LoadingIndicator
-import { trackPromise } from 'react-promise-tracker';
-import LoadingIndicatorStar from '../LoadingIndicatorStar/LoadingIndicatorStar';
+import SessionApiService from '../../services/session-api-service';
 
 export default class SessionListItem extends Component {
 	static contextType = AppContext;
 
+	state = { wasClicked: null };
+
+	addToSchedule = session_id => {
+		// add session tp schedule
+		// AND add user_id on that session record in sessionList
+
+		this.context.addScheduleItem({
+			session_id: session_id,
+			user_id: this.context.loginUserId
+		});
+
+		// change cursor
+		document.body.style.cursor = 'wait';
+
+		// start timer named "starsAdd"
+		// console.time('starsAdd');
+
+		SessionApiService.addScheduleItem(session_id)
+			.then(() => {
+				SessionApiService.getSchedule().then(scheduleResult => {
+					SessionApiService.getSessions().then(sessionResult => {
+						this.context.setScheduleList(scheduleResult);
+						this.context.setSessionList(sessionResult);
+
+						// change cursor back
+						document.body.style.cursor = 'default';
+
+						this.setState({ wasClicked: null });
+
+						// end timer named "starsAdd"
+						// console.timeEnd('starsAdd');
+					});
+				});
+			})
+			.catch(this.context.setError);
+	};
+
+	removeFromSchedule = schedule_id => {
+		// remove session from schedule
+		// AND clear user_id on that session record in sessionList
+
+		this.context.removeScheduleItem(schedule_id);
+
+		// change cursor
+		document.body.style.cursor = 'wait';
+
+		SessionApiService.deleteScheduleItem(schedule_id)
+			.then(() => {
+				SessionApiService.getSchedule().then(scheduleResult => {
+					SessionApiService.getSessions().then(sessionResult => {
+						// this.context.setScheduleList(scheduleResult);
+						this.context.setSessionList(sessionResult);
+
+						// change cursor back
+						document.body.style.cursor = 'default';
+
+						this.setState({ wasClicked: null });
+					});
+				});
+			})
+			.catch(this.context.setError);
+	};
+
 	render() {
 		const { loginUserId, setToggleId, toggleId, expandAll } = this.context;
 		const { session, pathname } = this.props;
-
-		console.log('pathname = ', this.props.pathname);
 
 		return (
 			<>
@@ -99,39 +158,45 @@ export default class SessionListItem extends Component {
 								)}
 							</button>
 						) : null}
-
+						<br />
 						{loginUserId &&
 						session.user_id === loginUserId &&
 						this.props.hideStars === false ? (
 							<>
-								<button
-									className="btn-remove-from-schedule"
-									aria-label="add-session-to-schedule-button"
-									onClick={() =>
-										this.props.removeFromSchedule(session.schedule_id)
-									}
-								>
-									<br />
-									<FontAwesomeIcon icon={['fas', 'star']} size="2x" />
-								</button>
-
-								{this.props.pathname !== '/schedule' ? (
-									<LoadingIndicatorStar area="stars-remove" />
-								) : null}
+								{session.session_id === this.state.wasClicked ? (
+									<span className="processing">Removing</span>
+								) : (
+									<button
+										className="btn-remove-from-schedule"
+										aria-label="add-session-to-schedule-button"
+										onClick={() => {
+											this.removeFromSchedule(session.schedule_id);
+											this.setState({ wasClicked: session.session_id });
+										}}
+									>
+										<FontAwesomeIcon icon={['fas', 'star']} size="2x" />
+									</button>
+								)}
 							</>
 						) : null}
 						{loginUserId &&
 						session.user_id !== loginUserId &&
 						this.props.hideStars === false ? (
 							<>
-								<button
-									className="btn-add-to-schedule"
-									aria-label="add-session-to-schedule-button"
-									onClick={() => this.props.addToSchedule(session.session_id)}
-								>
-									<FontAwesomeIcon icon={['far', 'star']} size="2x" />
-								</button>
-								<LoadingIndicatorStar area="stars-add" />
+								{session.session_id === this.state.wasClicked ? (
+									<span className="processing">Adding</span>
+								) : (
+									<button
+										className="btn-add-to-schedule"
+										aria-label="add-session-to-schedule-button"
+										onClick={() => {
+											this.addToSchedule(session.session_id);
+											this.setState({ wasClicked: session.session_id });
+										}}
+									>
+										<FontAwesomeIcon icon={['far', 'star']} size="2x" />
+									</button>
+								)}
 							</>
 						) : null}
 					</div>
