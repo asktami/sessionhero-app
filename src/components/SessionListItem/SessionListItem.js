@@ -164,7 +164,13 @@ export default class SessionListItem extends Component {
 						this.props.hideStars === false ? (
 							<>
 								{session.session_id === this.state.wasClicked ? (
-									<span className="processing">Removing</span>
+									<span className="processing">
+										Removing
+										<br />
+										from
+										<br />
+										schedule
+									</span>
 								) : (
 									<button
 										className="btn-remove-from-schedule"
@@ -184,7 +190,13 @@ export default class SessionListItem extends Component {
 						this.props.hideStars === false ? (
 							<>
 								{session.session_id === this.state.wasClicked ? (
-									<span className="processing">Adding</span>
+									<span className="processing">
+										Adding
+										<br />
+										to
+										<br />
+										schedule
+									</span>
 								) : (
 									<button
 										className="btn-add-to-schedule"
