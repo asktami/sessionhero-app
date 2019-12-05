@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto|Fjalla+One|PT+Sans+Narrow|Coming+Soon');
+@import url('https://fonts.googleapis.com/css?family=Roboto|Raleway|Coming+Soon');
 
 * {
 	box-sizing: border-box;
@@ -124,12 +124,15 @@ h2,
 p:not(.simple),
 a:link,
 button,
+input,
+form,
 footer {
-	font-family: 'Fjalla One', sans-serif;
+	font-family: 'Coming Soon', 'Roboto', cursive;
 	font-size: inherit;
 }
 
-form {
+select {
+	font-family: 'Roboto';
 	font-size: inherit;
 }
 
@@ -178,11 +181,9 @@ small {
 .error {
 	color: #ca1551;
 	font-weight: bold;
-	font-size: 14px;
 }
 
 form {
-	font-family: 'Roboto', sans-serif;
 	font-size: inherit;
 }
 
@@ -192,21 +193,18 @@ form {
 }
 
 select {
-	font-family: 'Coming Soon', 'Roboto', cursive;
 	color: #666;
 	height: 32px;
 	border: 1px solid #ddd;
 	padding: 6px;
-	font-size: inherit;
 }
 
 input,
 textarea {
-	font-family: 'Coming Soon', 'Roboto', cursive;
 	color: #666;
 	border: 1px solid #ddd;
 	display: block;
-	font-size: 16px;
+	font-size: 1.1em;
 	margin-bottom: 10px;
 	padding: 10px;
 	text-align: left;
@@ -608,7 +606,6 @@ button:focus:before {
 .comment-form {
 	padding-top: 20px;
 	border-top: 2px solid #6daffe;
-	color: #444;
 }
 
 .comment-item {
@@ -618,9 +615,8 @@ button:focus:before {
 }
 
 .comment-text {
-	font-family: 'Coming Soon', 'Roboto', cursive;
-	color: #444;
-	font-size: 14px;
+	font-family: 'Coming Soon', cursive;
+	font-size: 16px;
 	background: #fff;
 	border-radius: 4px;
 	padding-top: 10px;
@@ -632,13 +628,13 @@ p.comment-user {
 }
 .comment-user {
 	/* use the color of the session track */
-	font-family: 'Roboto', sans-serif;
 	font-size: 10pt;
 	font-weight: 400;
 	background: #fff;
 	line-height: 1.5;
 }
 .comment-footer {
+	font-family: 'Roboto', sans-serif;
 	align-self: center;
 }
 
@@ -725,14 +721,14 @@ label.star:before {
 
 .text-center {
 	margin: 0 auto;
-	font-family: 'Fjalla One', sans-serif;
+	font-family: 'Coming Soon', cursive;
 	text-align: center;
 }
 
 .processing {
 	margin: 0 auto;
+	font-family: 'Coming Soon', cursive;
 	text-align: center;
 	color: #bd8400; /* darkgold */
 	font-weight: bold;
-	font-size: 14px;
 }
