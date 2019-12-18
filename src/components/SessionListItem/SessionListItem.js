@@ -121,15 +121,20 @@ export default class SessionListItem extends Component {
 						</div>
 
 						<div className="description">
-							<span>
-								<Link to={`/sessions/${session.session_id}`}>
-									<span className="simple title">{session.name}</span>
-								</Link>
-								{/* <br />
+							{this.props.pathname.includes('/sessions') ? (
+								<span className="simple title">{session.name}</span>
+							) : (
+								<span>
+									<Link to={`/sessions/${session.session_id}`}>
+										<span className="simple title">{session.name}</span>
+									</Link>
+
+									{/* <br />
 								session.session_id = {session.session_id}
 								<br />
 								session.user_id = {session.user_id} */}
-							</span>
+								</span>
+							)}
 							<br />
 							<span className="location">{session.location}</span>
 						</div>
