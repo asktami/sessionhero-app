@@ -32,9 +32,6 @@ const SessionApiService = {
 						? res.headers.get('content-type').indexOf('application/json') !== -1
 						: null;
 
-				// console.log('contentType = ', contentType);
-				// console.log('isJSON = ', isJSON);
-
 				// replaced:
 				// return !res.ok ? res.json().then(e => Promise.reject(e)) : res.json();
 

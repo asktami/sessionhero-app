@@ -93,10 +93,6 @@ export default class SessionListPage extends Component {
 	render() {
 		const { error } = this.context;
 
-		// console.log('sessionList in context = ', this.context.sessionList);
-		// console.log('scheduleList in context = ', this.context.scheduleList);
-		// console.log('loginUserId in context = ', this.context.loginUserId);
-
 		return (
 			<section>
 				{error ? (
