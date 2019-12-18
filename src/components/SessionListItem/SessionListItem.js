@@ -18,8 +18,12 @@ export default class SessionListItem extends Component {
 
 	state = { wasClicked: null };
 
+	// NOTE: I use document.body.style.cursor and state 'wasClicked' because of page render timing issues, to give feedback to user so that they see the app is adding to schedule/removing from schedule messages when the network is slow and that process is taking a while to complete; without it users complained that it looked like nothing was happening
+
+	// a schedule record has both the session_id ANDD logged in user's user_id
+
 	addToSchedule = session_id => {
-		// add session tp schedule
+		// add session to schedule
 		// AND add user_id on that session record in sessionList
 
 		this.context.addScheduleItem({
