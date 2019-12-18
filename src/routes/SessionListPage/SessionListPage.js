@@ -87,7 +87,11 @@ export default class SessionListPage extends Component {
 				</li>
 			));
 
-		return <ul className="sessions-list">{result}</ul>;
+		if (result.length === 0) {
+			return <div className="text-center">No results.</div>;
+		} else {
+			return <ul className="sessions-list">{result}</ul>;
+		}
 	}
 
 	render() {
