@@ -78,11 +78,11 @@ class SearchBar extends Component {
 						<select
 							id="filter-track"
 							name="filter-track"
-							aria-label="Select by Track"
+							aria-label="Select by Track (Category)"
 							value={filterTrack}
 							onChange={e => setFilterTrack(e.target.value)}
 						>
-							<option value="">Select by Track</option>
+							<option value="">Select by Track (Category)</option>
 							<option value="training" data-filter="training">
 								Training Day
 							</option>
