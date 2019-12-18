@@ -13,9 +13,16 @@ class Header extends Component {
 				return (
 					<>
 						<p>
-							Search for conference sessions, click on stars to add/remove
-							conference sessions to/from your schedule, comment on sessions,
-							and see comments made by others.
+							Search for{' '}
+							<a
+								href="http://www.filemaker.com"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<u>2019 FileMaker Developer Conference</u>
+							</a>{' '}
+							sessions, click on stars to add/remove sessions to/from your
+							schedule, comment on sessions, and see comments made by others.
 						</p>
 
 						<p>
