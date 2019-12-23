@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SessionStarRating component renders SessionStarRating by default 1`] = `
+<span
+  className="SessionStarRating"
+>
+  <Star
+    filled={true}
+    key="0"
+  />
+  <Star
+    filled={true}
+    key="1"
+  />
+  <Star
+    filled={true}
+    key="2"
+  />
+  <Star
+    filled={false}
+    key="3"
+  />
+  <Star
+    filled={false}
+    key="4"
+  />
+</span>
+`;
+
+exports[`SessionStarRating component renders the SessionStarRating given props 1`] = `
+<span
+  className="SessionStarRating"
+>
+  <Star
+    filled={true}
+    key="0"
+  />
+  <Star
+    filled={true}
+    key="1"
+  />
+  <Star
+    filled={true}
+    key="2"
+  />
+  <Star
+    filled={false}
+    key="3"
+  />
+  <Star
+    filled={false}
+    key="4"
+  />
+</span>
+`;

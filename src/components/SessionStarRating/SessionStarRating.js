@@ -25,5 +25,5 @@ export function SessionStarRating({ rating }) {
 
 function Star({ filled }) {
 	const library = filled ? 'fas' : 'far';
-	return <FontAwesomeIcon className="blue" icon={[library, 'star']} />;
+	return <FontAwesomeIcon icon={[library, 'star']} />;
 }
