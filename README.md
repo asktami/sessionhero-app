@@ -1,6 +1,6 @@
 # SessionHero
 
-![Sessions screenshot](https://github.com/asktami/sessionhero-app/blob/master/sessionhero-2.png 'Sessions')
+   ![SessionHero screenshot](https://github.com/asktami/sessionhero-app/blob/master/sessionhero-1.png 'SessionHero')
 
 [View Live](https://sessionhero-app.now.sh/)
 
