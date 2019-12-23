@@ -1,10 +1,6 @@
 # SessionHero
 
-![SessionHero screenshot](https://github.com/asktami/sessionhero-app/blob/master/sessionhero-1.png 'SessionHero')
 ![Sessions screenshot](https://github.com/asktami/sessionhero-app/blob/master/sessionhero-2.png 'Sessions')
-![Schedule screenshot](https://github.com/asktami/sessionhero-app/blob/master/sessionhero-3.png 'Schedule')
-![Session Expanded screenshot](https://github.com/asktami/sessionhero-app/blob/master/sessionhero-4.png 'Session Expanded')
-![Session Comments screenshot](https://github.com/asktami/sessionhero-app/blob/master/sessionhero-5.png 'Session Comments')
 
 [View Live](https://sessionhero-app.now.sh/)
 
