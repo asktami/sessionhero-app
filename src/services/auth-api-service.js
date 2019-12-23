@@ -65,7 +65,7 @@ const AuthApiService = {
 				return res;
 			})
 			.catch(err => {
-				console.error(err);
+				// console.error(err);
 			});
 	}
 };

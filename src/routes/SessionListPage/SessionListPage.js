@@ -21,14 +21,14 @@ export default class SessionListPage extends Component {
 		this.context.clearError();
 		this.context.clearFilters();
 
-		console.time('stars');
+		// console.time('stars');
 		trackPromise(
 			Promise.all([
 				SessionApiService.getSchedule(),
 				SessionApiService.getSessions()
 			])
 				.then(results => {
-					console.timeEnd('stars');
+					// console.timeEnd('stars');
 
 					const schedule = results[0];
 					const sessions = results[1];
