@@ -1,6 +1,8 @@
 # SessionHero
 
-![SessionHero screenshot](https://github.com/asktami/sessionhero-app-for-postgres/blob/master/sessionhero.png 'SessionHero')
+![SessionHero screenshot](https://github.com/asktami/sessionhero-app/blob/master/sessionhero-1.png 'SessionHero')
+![Sessions screenshot](https://github.com/asktami/sessionhero-app/blob/master/sessionhero-2.png 'Sessions')
+![Schedule screenshot](https://github.com/asktami/sessionhero-app/blob/master/sessionhero-3.png 'Schedule')
 
 [View Live](https://sessionhero-app.now.sh/)
 
