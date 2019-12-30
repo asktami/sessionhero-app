@@ -100,7 +100,7 @@ export default class RegistrationForm extends Component {
 				<div role="alert">{error && <p className="error">{error}</p>}</div>
 				<div>
 					<label htmlFor="fullname">
-						Fullname <Required />
+						Full Name <Required />
 					</label>
 					<input name="fullname" type="text" required id="fullname" />
 				</div>
