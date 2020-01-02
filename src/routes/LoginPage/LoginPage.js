@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import LoginForm from '../../components/LoginForm/LoginForm';
 
 export default class LoginPage extends Component {
-	static defaultProps = {
-		location: {},
-		history: {
-			push: () => {}
-		}
-	};
+	// only need defaultProps if 1st time component rendered need to do something before provide a prop
+	// static defaultProps = {
+	// 	location: {},
+	// 	history: {
+	// 		push: () => {}
+	// 	}
+	// };
 
 	handleLoginSuccess = () => {
 		const { location, history } = this.props;
@@ -19,7 +20,10 @@ export default class LoginPage extends Component {
 		return (
 			<section>
 				<h2>Login</h2>
-				<LoginForm onLoginSuccess={this.handleLoginSuccess} />
+				<LoginForm
+					history={this.props.history}
+					onLoginSuccess={this.handleLoginSuccess}
+				/>
 			</section>
 		);
 	}

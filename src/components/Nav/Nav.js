@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import AppContext from '../../contexts/AppContext';
-import TokenService from '../../services/token-service';
 import { Pipe } from '../../components/Utils/Utils';
+
+import TokenService from '../../services/token-service';
+import IdleService from '../../services/idle-service';
+
 import '../../index.css';
 
 // to get props in Nav
@@ -13,6 +16,9 @@ class Nav extends Component {
 
 	handleLogoutClick = () => {
 		TokenService.clearAuthToken();
+		/* when logging out, clear the callbacks to the refresh api and idle auto logout */
+		TokenService.clearCallbackBeforeExpiry();
+		IdleService.unRegisterIdleResets();
 		this.context.setLoginUserId('');
 	};
 

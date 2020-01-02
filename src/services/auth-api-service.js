@@ -14,7 +14,8 @@ const AuthApiService = {
 			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
 		);
 	},
-	postLogin({ username, password }) {
+	// postLogin = user logs into database
+	postLogin({ username, password, history }) {
 		return fetch(`${config.API_ENDPOINT}/auth/login`, {
 			method: 'POST',
 			headers: {
@@ -26,16 +27,17 @@ const AuthApiService = {
 				!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
 			)
 			.then(res => {
-				/*
-          whenever a login is performed:
-          1. save the token in local storage
-          2. queue auto logout when the user goes idle
-          3. queue a call to the refresh endpoint based on the JWT's exp value
-        */
-
+				// whenever a login is performed:
+				// 1. save the jwt token in local/session storage
 				TokenService.saveAuthToken(res.authToken);
-				IdleService.regiserIdleTimerResets();
+
+				//  2. queue auto logout when the user goes idle -- set a timer for amount of time before automatic logout if user is idle
+				IdleService.registerIdleTimerResets();
+
+				// when the amount of time the user has been idle = the automatic timeout time (doWhenExpires)
+
 				TokenService.queueCallbackBeforeExpiry(() => {
+					// 3. queue a call to the refresh endpoint based on the JWT's exp value
 					AuthApiService.postRefreshToken();
 				});
 
@@ -65,7 +67,8 @@ const AuthApiService = {
 				return res;
 			})
 			.catch(err => {
-				// console.error(err);
+				// console.log('refresh token request error')
+				// console.error(err)
 			});
 	}
 };

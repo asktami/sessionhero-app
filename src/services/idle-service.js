@@ -14,7 +14,6 @@ let _notIdleEvents = [
 	'touchstart'
 ];
 let _FIVE_MINUTES_IN_MS = 5 * 60 * 1000;
-
 const IdleService = {
 	setIdleCallback(idleCallback) {
 		/* store a callback to call when the user goes idle */
@@ -28,7 +27,7 @@ const IdleService = {
 		/* queue the callback to happen 5 minutes from now */
 		_timeoutId = setTimeout(_idleCallback, _FIVE_MINUTES_IN_MS);
 	},
-	regiserIdleTimerResets() {
+	registerIdleTimerResets() {
 		/* register the resetIdleTimer for events when a user interacts with page */
 		_notIdleEvents.forEach(event =>
 			document.addEventListener(event, IdleService.resetIdleTimer, true)
