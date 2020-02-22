@@ -1,13 +1,12 @@
 # SessionHero
 
-   ![SessionHero screenshot](https://github.com/asktami/sessionhero-app/blob/master/sessionhero-2.png 'SessionHero')
+![SessionHero screenshot](https://github.com/asktami/sessionhero-app/blob/master/sessionhero-2.png 'SessionHero')
 
 [View Live](https://sessionhero-app.now.sh/)
 
-
 ## Description
 
-Attendee Conference Session Scheduler / SessionTracker / Agenda Builder
+Conference Attendee Session Scheduler / SessionTracker / Agenda Builder
 
 - a React Fullstack App
 
