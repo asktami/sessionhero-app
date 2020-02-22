@@ -48,6 +48,11 @@ Works with [https://github.com/asktami/sessionhero-api](https://github.com/askta
 - Chai
 - Supertest
 
+## Hosted on
+
+- Heroku
+- Zeit
+
 ## Setup
 
 1. See [https://github.com/asktami/sessionhero-api](https://github.com/asktami/sessionhero-api) for instructions on installing the backend API
