@@ -74,7 +74,6 @@ export default class LoginForm extends Component {
 				<div className="password">
 					<label htmlFor="password">Password</label>
 					<input
-						required
 						type="password"
 						required
 						name="password"
