@@ -8,7 +8,7 @@ export default class LoginForm extends Component {
 	static contextType = AppContext;
 
 	static defaultProps = {
-		onLoginSuccess: () => {}
+		onLoginSuccess: () => {},
 	};
 
 	state = { error: null };
@@ -28,7 +28,7 @@ export default class LoginForm extends Component {
 	// 	this.props.onLoginSuccess();
 	// };
 
-	handleSubmitJwtAuth = e => {
+	handleSubmitJwtAuth = (e) => {
 		e.preventDefault();
 		this.setState({ error: null });
 		const { username, password } = e.target;
@@ -36,9 +36,9 @@ export default class LoginForm extends Component {
 		AuthApiService.postLogin({
 			username: username.value,
 			password: password.value,
-			history: this.props.history
+			history: this.props.history,
 		})
-			.then(res => {
+			.then((res) => {
 				username.value = '';
 				password.value = '';
 
@@ -50,7 +50,7 @@ export default class LoginForm extends Component {
 				this.props.onLoginSuccess();
 			})
 
-			.catch(res => {
+			.catch((res) => {
 				this.setState({ error: res.message });
 			});
 	};
@@ -63,11 +63,24 @@ export default class LoginForm extends Component {
 				<div role="alert">{error && <p className="error">{error}</p>}</div>
 				<div>
 					<label htmlFor="username">Username</label>
-					<input type="text" required name="username" id="username" />
+					<input
+						type="text"
+						required
+						name="username"
+						id="username"
+						autocomplete="username"
+					/>
 				</div>
 				<div className="password">
 					<label htmlFor="password">Password</label>
-					<input required name="password" type="password" id="password" />
+					<input
+						required
+						type="password"
+						required
+						name="password"
+						id="password"
+						autocomplete="current-password"
+					/>
 				</div>
 				<button className="btn-basic">Login</button>
 			</form>
