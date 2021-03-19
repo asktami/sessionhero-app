@@ -1,4 +1,4 @@
-import config from '../config';
+import { config } from '../config';
 import TokenService from './token-service';
 import IdleService from './idle-service';
 
@@ -7,11 +7,11 @@ const AuthApiService = {
 		return fetch(`${config.API_ENDPOINT}/users`, {
 			method: 'POST',
 			headers: {
-				'content-type': 'application/json'
+				'content-type': 'application/json',
 			},
-			body: JSON.stringify(user)
-		}).then(res =>
-			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+			body: JSON.stringify(user),
+		}).then((res) =>
+			!res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
 		);
 	},
 	// postLogin = user logs into database
@@ -19,14 +19,14 @@ const AuthApiService = {
 		return fetch(`${config.API_ENDPOINT}/auth/login`, {
 			method: 'POST',
 			headers: {
-				'content-type': 'application/json'
+				'content-type': 'application/json',
 			},
-			body: JSON.stringify({ username, password })
+			body: JSON.stringify({ username, password }),
 		})
-			.then(res =>
-				!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+			.then((res) =>
+				!res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
 			)
-			.then(res => {
+			.then((res) => {
 				// whenever a login is performed:
 				// 1. save the jwt token in local/session storage
 				TokenService.saveAuthToken(res.authToken);
@@ -48,13 +48,13 @@ const AuthApiService = {
 		return fetch(`${config.API_ENDPOINT}/auth/refresh`, {
 			method: 'POST',
 			headers: {
-				authorization: `Bearer ${TokenService.getAuthToken()}`
-			}
+				authorization: `Bearer ${TokenService.getAuthToken()}`,
+			},
 		})
-			.then(res =>
-				!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+			.then((res) =>
+				!res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
 			)
-			.then(res => {
+			.then((res) => {
 				/*
           similar logic to whenever a user logs in, the only differences are:
           - we don't need to queue the idle timers again as the user is already logged in
@@ -66,11 +66,11 @@ const AuthApiService = {
 				});
 				return res;
 			})
-			.catch(err => {
+			.catch((err) => {
 				// console.log('refresh token request error')
 				// console.error(err)
 			});
-	}
+	},
 };
 
 export default AuthApiService;

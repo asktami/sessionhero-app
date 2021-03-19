@@ -13,24 +13,24 @@
 		"postdeploy": "now --prod"
 	},
 	"dependencies": {
-		"@fortawesome/fontawesome-svg-core": "^1.2.25",
-		"@fortawesome/free-brands-svg-icons": "^5.11.2",
-		"@fortawesome/free-regular-svg-icons": "^5.7.2",
-		"@fortawesome/free-solid-svg-icons": "^5.11.2",
-		"@fortawesome/react-fontawesome": "^0.1.7",
+		"@fortawesome/fontawesome-svg-core": "^1.2.34",
+		"@fortawesome/free-brands-svg-icons": "^5.15.2",
+		"@fortawesome/free-regular-svg-icons": "^5.15.2",
+		"@fortawesome/free-solid-svg-icons": "^5.15.2",
+		"@fortawesome/react-fontawesome": "^0.1.14",
 		"bcryptjs": "^2.4.3",
 		"classnames": "^2.2.6",
 		"jsonwebtoken": "^8.5.1",
 		"jwt-decode": "^2.2.0",
 		"prop-types": "^15.7.2",
-		"query-string": "^6.9.0",
-		"react": "^16.8.1",
-		"react-dom": "^16.8.1",
-		"react-loader-spinner": "^3.1.5",
-		"react-promise-tracker": "^2.0.5",
-		"react-router": "^5.1.2",
-		"react-router-dom": "^5.1.2",
-		"react-scripts": "^3.2.0"
+		"query-string": "^6.14.1",
+		"react": "^16.14.0",
+		"react-dom": "^16.14.0",
+		"react-loader-spinner": "^3.1.14",
+		"react-promise-tracker": "^2.1.0",
+		"react-router": "^5.2.0",
+		"react-router-dom": "^5.2.0",
+		"react-scripts": "^4.0.3"
 	},
 	"eslintConfig": {
 		"extends": "react-app"
@@ -42,12 +42,12 @@
 		"not op_mini all"
 	],
 	"devDependencies": {
-		"@fortawesome/fontawesome-free": "^5.11.2",
-		"enzyme": "^3.10.0",
-		"enzyme-adapter-react-16": "^1.15.1",
-		"enzyme-to-json": "^3.4.3",
-		"react-test-renderer": "^16.11.0",
-		"typescript": "^3.7.2"
+		"@fortawesome/fontawesome-free": "^5.15.2",
+		"enzyme": "^3.11.0",
+		"enzyme-adapter-react-16": "^1.15.6",
+		"enzyme-to-json": "^3.6.1",
+		"react-test-renderer": "^16.14.0",
+		"typescript": "^3.9.9"
 	},
 	"contributors": [
 		"Tami Williams <tami@asktami.com>"

@@ -1,4 +1,5 @@
-import config from '../config';
+import { config } from '../config';
+
 import TokenService from './token-service';
 
 const SessionApiService = {
@@ -11,10 +12,10 @@ const SessionApiService = {
 			return fetch(`${config.API_ENDPOINT}/sessions/`, {
 				headers: {
 					'content-type': 'application/json',
-					authorization: `bearer ${TokenService.getAuthToken()}`
-				}
-			}).then(res =>
-				!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+					authorization: `bearer ${TokenService.getAuthToken()}`,
+				},
+			}).then((res) =>
+				!res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
 			);
 
 			// return Promise.resolve();
@@ -22,9 +23,9 @@ const SessionApiService = {
 			return fetch(`${config.API_ENDPOINT}/sessions/`, {
 				headers: {
 					'content-type': 'application/json',
-					authorization: `none`
-				}
-			}).then(res => {
+					authorization: `none`,
+				},
+			}).then((res) => {
 				// NOTE: sometimes comes back with e.headers.get() is null and so errors with cannot ready propery indexOf of null
 				const isJSON =
 					res.headers.get('content-type') !== null &&
@@ -48,8 +49,8 @@ const SessionApiService = {
 
 				return !res.ok
 					? isJSON
-						? res.json().then(e => Promise.reject(e))
-						: res.text().then(e => Promise.reject(e))
+						? res.json().then((e) => Promise.reject(e))
+						: res.text().then((e) => Promise.reject(e))
 					: res.json();
 			});
 		}
@@ -70,10 +71,10 @@ const SessionApiService = {
 			return fetch(`${config.API_ENDPOINT}/schedule`, {
 				headers: {
 					'content-type': 'application/json',
-					authorization: `bearer ${TokenService.getAuthToken()}`
-				}
-			}).then(res =>
-				!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+					authorization: `bearer ${TokenService.getAuthToken()}`,
+				},
+			}).then((res) =>
+				!res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
 			);
 		}
 	},
@@ -82,10 +83,10 @@ const SessionApiService = {
 		return fetch(`${config.API_ENDPOINT}/sessions/${session_id}`, {
 			headers: {
 				'content-type': 'application/json',
-				authorization: `bearer ${TokenService.getAuthToken()}`
-			}
-		}).then(res =>
-			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+				authorization: `bearer ${TokenService.getAuthToken()}`,
+			},
+		}).then((res) =>
+			!res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
 		);
 	},
 	getSessionComments(session_id) {
@@ -93,10 +94,10 @@ const SessionApiService = {
 		return fetch(`${config.API_ENDPOINT}/sessions/${session_id}/comments`, {
 			headers: {
 				'content-type': 'application/json',
-				authorization: `bearer ${TokenService.getAuthToken()}`
-			}
-		}).then(res =>
-			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+				authorization: `bearer ${TokenService.getAuthToken()}`,
+			},
+		}).then((res) =>
+			!res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
 		);
 	},
 	getComment(comment_id) {
@@ -104,10 +105,10 @@ const SessionApiService = {
 		return fetch(`${config.API_ENDPOINT}/comments/${comment_id}`, {
 			headers: {
 				'content-type': 'application/json',
-				authorization: `bearer ${TokenService.getAuthToken()}`
-			}
-		}).then(res =>
-			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+				authorization: `bearer ${TokenService.getAuthToken()}`,
+			},
+		}).then((res) =>
+			!res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
 		);
 	},
 
@@ -117,10 +118,10 @@ const SessionApiService = {
 			method: 'DELETE',
 			headers: {
 				'content-type': 'application/json',
-				authorization: `bearer ${TokenService.getAuthToken()}`
-			}
+				authorization: `bearer ${TokenService.getAuthToken()}`,
+			},
 		}).then(
-			res => (!res.ok ? res.json().then(e => Promise.reject(e)) : null)
+			(res) => (!res.ok ? res.json().then((e) => Promise.reject(e)) : null)
 
 			// WAS - SyntaxError: Unexpected end of JSON input
 			// .then(res =>
@@ -133,11 +134,11 @@ const SessionApiService = {
 			method: 'PATCH',
 			headers: {
 				'content-type': 'application/json',
-				authorization: `bearer ${TokenService.getAuthToken()}`
+				authorization: `bearer ${TokenService.getAuthToken()}`,
 			},
-			body: JSON.stringify(comment)
+			body: JSON.stringify(comment),
 		}).then(
-			res => (!res.ok ? res.json().then(e => Promise.reject(e)) : null)
+			(res) => (!res.ok ? res.json().then((e) => Promise.reject(e)) : null)
 
 			// WAS - SyntaxError: Unexpected end of JSON input
 			// .then(res =>
@@ -150,15 +151,15 @@ const SessionApiService = {
 			method: 'POST',
 			headers: {
 				'content-type': 'application/json',
-				authorization: `bearer ${TokenService.getAuthToken()}`
+				authorization: `bearer ${TokenService.getAuthToken()}`,
 			},
 			body: JSON.stringify({
 				session_id,
 				comment,
-				rating
-			})
-		}).then(res =>
-			!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+				rating,
+			}),
+		}).then((res) =>
+			!res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
 		);
 	},
 
@@ -168,13 +169,13 @@ const SessionApiService = {
 			method: 'POST',
 			headers: {
 				'content-type': 'application/json',
-				authorization: `bearer ${TokenService.getAuthToken()}`
+				authorization: `bearer ${TokenService.getAuthToken()}`,
 			},
 			body: JSON.stringify({
-				session_id
-			})
+				session_id,
+			}),
 		}).then(
-			res => (!res.ok ? res.json().then(e => Promise.reject(e)) : null)
+			(res) => (!res.ok ? res.json().then((e) => Promise.reject(e)) : null)
 
 			// WAS - SyntaxError: Unexpected end of JSON input
 			// .then(res =>
@@ -188,16 +189,16 @@ const SessionApiService = {
 			method: 'DELETE',
 			headers: {
 				'content-type': 'application/json',
-				authorization: `bearer ${TokenService.getAuthToken()}`
-			}
+				authorization: `bearer ${TokenService.getAuthToken()}`,
+			},
 		}).then(
-			res => (!res.ok ? res.json().then(e => Promise.reject(e)) : null)
+			(res) => (!res.ok ? res.json().then((e) => Promise.reject(e)) : null)
 
 			// WAS - SyntaxError: Unexpected end of JSON input
 			// .then(res =>
 			// 	!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
 		);
-	}
+	},
 };
 
 export default SessionApiService;
